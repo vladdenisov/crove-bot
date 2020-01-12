@@ -1,0 +1,29 @@
+{
+  "name": "crove-bot",
+  "version": "1.0.0",
+  "description": "Simple Bot For Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "music",
+    "spotify",
+    "youtube",
+    "voice",
+    "ytdl"
+  ],
+  "author": "Vlad Denisov",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js",
+    "enmap": "^5.2.4",
+    "ffmpeg-static": "^3.0.0",
+    "node-opus": "^0.3.3",
+    "ytdl-core": "^1.0.6",
+    "ytpl": "^0.1.19",
+    "ytsr": "^0.1.10"
+  }
+}
