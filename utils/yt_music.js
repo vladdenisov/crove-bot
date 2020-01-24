@@ -27,7 +27,6 @@ exports.queue = async (client, message) => {
 exports.play = async (client, message) => {
     console.log(servers[message.guild.id].queue);
     let server = servers[message.guild.id];
-    if (!server.queue[0]) {voice_api.leave(client, message); return 0;}
     try {
         servers[message.guild.id].dispatcher = servers[message.guild.id].connection.play(ytdl(message.content, {
             filter: "audioonly",
@@ -36,8 +35,9 @@ exports.play = async (client, message) => {
         server.dispatcher.on('end', async () => {
             console.log(server.queue);
             server.queue.shift();
+            if (!server.queue[0]) {await voice_api.leave(client, message); return;}
             this.play(client, message);
-            return 0;
+            return;
     
         });
         server.dispatcher.on('error', (error) => {
@@ -66,6 +66,7 @@ exports.play = async (client, message) => {
         });
     }
     catch (error) {
+        //Handle errors
         console.error([error.message, error.name]);
         message.channel.send(error.message).then((e) => setTimeout(() => e.delete(), 2000));
         servers[message.guild.id].queue.shift();
