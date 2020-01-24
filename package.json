@@ -4,7 +4,7 @@
   "description": "Simple Bot For Discord",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo At this point, the build has succeded and the bot should've been tested, but I don't want to run the bot from the CI."
   },
   "keywords": [
     "bot",
