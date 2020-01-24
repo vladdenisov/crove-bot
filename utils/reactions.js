@@ -1,4 +1,6 @@
-exports.hook = (client, message) => {
+//File to handle Reactions changes
+const voice_api = require('./voice_api');
+exports.hook = async (client, message) => {
     console.log("Hooked");
     client.on('raw', event => {
         server = servers[message.guild.id];
@@ -9,8 +11,7 @@ exports.hook = (client, message) => {
                server.dispatcher.end();
             }
             if (event.d.emoji.name === "⏹") {
-               server.queue = [];
-               server.dispatcher.end();
+                voice_api.leave(client, message);
             }
             if (event.d.emoji.name === "⏯") {
                 if (!server.dispatcher.isPaused) {
@@ -21,10 +22,6 @@ exports.hook = (client, message) => {
                     server.dispatcher.resume();
                 }
             }
-            else {
-
-            }
         }
-    }
-    );
+    });
 };
