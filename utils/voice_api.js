@@ -1,15 +1,28 @@
+const reactions = require('./reactions.js');
+const { MessageEmbed } = require('discord.js');
 exports.join = async (client, message) => {
     if (message.member.voice.channel) {
-        const connection = await message.member.voice.channel.join();
+        await message.member.voice.channel.join()
+        .then(connection => {
+            if (!servers[message.guild.id]) {
+                servers[message.guild.id] = { 
+                    connection: connection, 
+                    dispatcher: null, 
+                    queue: [] 
+                };
+                reactions.hook(client, message);
+            }
+            if (servers[message.guild.id].connection === connection) return;
+            else {
+                servers[message.guild.id].connection = connection;
+                servers[message.guild.id].queue = [];
+            }
+            
+        });
     } else {
         message.reply('You need to join a voice channel first!');
     }
-    await message.member.voice.channel.join()
-        .then(connection => {
-            if (!servers[message.guild.id]) servers[message.guild.id] = { connection: connection, dispatcher: null, queue: [] };
-            if (servers[message.guild.id].connection !== {}) return;
-            else servers[message.guild.id].connection = connection;
-        });
+    
 };
 exports.leave = async (client, message) => {
     await message.member.voice.channel.leave();
@@ -19,7 +32,7 @@ exports.leave = async (client, message) => {
         messages = Array.from(messages);
         let first_message = messages[messages.length - 1][1];
         let second_message = messages[messages.length - 2][1];
-        const eEmbed = new Discord.MessageEmbed()
+        const eEmbed = new MessageEmbed()
             .setColor('#0652DD')
             .setTitle('Music Bot')
             .setAuthor('Music')
