@@ -28,7 +28,7 @@ exports.play = async (client, message) => {
     console.log(servers[message.guild.id].queue);
     let server = servers[message.guild.id];
     try {
-        servers[message.guild.id].dispatcher = servers[message.guild.id].connection.play(ytdl(message.content, {
+        server.dispatcher = server.connection.play(ytdl(server.queue[0].url, {
             filter: "audioonly",
             highWaterMark: 1 << 25 //To prevent unexpected end of video
         }));
