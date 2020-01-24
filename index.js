@@ -11,7 +11,7 @@ const client = new Discord.Client();
 //Initialize commands enmap
 client.commands = new Enmap();
 //Create global object with servers
-global.servers = {}
+global.servers = { };
 //Console.log that bot is ready and set bot activity
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -43,7 +43,9 @@ client.on("guildCreate", guild => {
             .addBlankField()
             .addField('Send link here to play something.', "Waiting...");
         //Send messages
-        channel.send(eEmbed);
+        channel.send(eEmbed).then((message) => {
+            message.react("⏭").then(() => message.react('⏯')).then(() => message.react('⏹'));
+        });
         channel.send("***Queue List:***");
     });
     //client.user.setActivity(`Serving ${client.guilds.size} servers`);
@@ -62,7 +64,7 @@ client.on("message", (message) => {
             return;
         }
         else return;
-    };
+    }
     //Take args from message
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     //Make command lowercased
