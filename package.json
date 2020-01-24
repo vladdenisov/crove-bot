@@ -18,6 +18,7 @@
   "author": "Vlad Denisov",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.1.0",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
     "ffmpeg-static": "^3.0.0",

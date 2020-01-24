@@ -4,10 +4,14 @@ const fs = require('fs');
 const Enmap = require('enmap');
 //Include config file
 const config = require('./config.json');
+//Include utils files
+const run_music = require('./utils/music');
 //Initialize Discord client
 const client = new Discord.Client();
 //Initialize commands enmap
 client.commands = new Enmap();
+//Create global object with servers
+global.servers = {}
 //Console.log that bot is ready and set bot activity
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -24,15 +28,37 @@ fs.readdir('./commands/', (err, files) => {
         client.commands.set(commandName, props);
     });
 });
+//Add music channel when added
+client.on("guildCreate", guild => {
+    console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+    guild.channels.create("music_req", "text").then((channel) => {
+        //Create embed message
+        const eEmbed = new Discord.MessageEmbed()
+            .setColor('#0652DD')
+            .setTitle('Music Bot')
+            .setAuthor('Music')
+            .setDescription('Playing Music')
+            .setThumbnail('https://cdn.discordapp.com/avatars/573460427753914368/5f6f60497f371261922916793ffbead0.png')
+            .addField('Now Playing', 'Nothing')
+            .addBlankField()
+            .addField('Send link here to play something.', "Waiting...");
+        //Send messages
+        channel.send(eEmbed);
+        channel.send("***Queue List:***");
+    });
+    //client.user.setActivity(`Serving ${client.guilds.size} servers`);
+});
 //Launch command by message
 client.on("message", (message) => {
     //Ignore bot messages
     if (message.author.bot) return;
+    //Ignore PM
+    if (!message.guild) return;
     //Ignore messages without prefix
     if (message.content.indexOf(config.prefix) !== 0) {
         //Except for messages in "music_req" channel. Launch Music command
         if (message.channel.name === "music_req") {
-            music_main(message, client, "PLAY_MUSIC");
+            run_music(client, message, ['message']);
             return;
         }
         else return;
