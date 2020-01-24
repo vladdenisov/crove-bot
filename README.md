@@ -10,18 +10,18 @@ You can try this bot out by inviting using [this link](https://discordapp.com/oa
 ## Run on your PC/Server
 
 1.  Clone this repo
-```sh
-    $ git clone https://github.com/vladdenisov/crove-bot.git
-    ```
+	```sh
+    	$ git clone https://github.com/vladdenisov/crove-bot.git
+    	```
 1.  Install build tools
 	- Linux (change package manager if necessary)
-	```sh
-    $ sudo apt install autoconf libtool g++ make
-    ```
+		```sh
+    		$ sudo apt install autoconf libtool g++ make
+    		```
 	- Windows 
-	```cmd
-	npm install --global windows-build-tools
-	```
+		```cmd
+		npm install --global windows-build-tools
+		```
 1. Get into crove-bot folder
 	```sh 
 	$ cd simple-discord-bot
@@ -37,6 +37,6 @@ You can try this bot out by inviting using [this link](https://discordapp.com/oa
 	```
 
 
-#Links
+# Links
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
