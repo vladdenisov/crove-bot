@@ -114,3 +114,4 @@ commands/play_file.js
 commands/leave.js
 workspace.code-workspace
 .vscode
+.jshintrc
