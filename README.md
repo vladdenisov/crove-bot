@@ -1,6 +1,8 @@
 # Crove Bot
-<img src="https://image.flaticon.com/icons/svg/122/122320.svg" align="right" width="80" height="50"/>Crove can play music from **Youtube, Spotify** and It has many other commands such as *purge, kick, 8ball*, etc.
-
+<img src="https://image.flaticon.com/icons/svg/122/122320.svg" align="right" width="80" height="50"/>
+Crove can play music from **Youtube, Spotify** and It has many other commands such as *purge, kick, 8ball*, etc.  
+  
+  
 ![](http://g.recordit.co/GpyFAaaINI.gif)
 
 # Usage
@@ -11,15 +13,15 @@ You can try this bot out by inviting using [this link](https://discordapp.com/oa
 
 1.  Clone this repo
 	```sh
-    	$ git clone https://github.com/vladdenisov/crove-bot.git
-    	```
+	$ git clone https://github.com/vladdenisov/crove-bot.git
+	```
 1.  Install build tools
 	- Linux (change package manager if necessary)
-		```sh
-    		$ sudo apt install autoconf libtool g++ make
-    		```
+		```sh 
+		$ sudo apt install autoconf libtool g++ make  
+		```
 	- Windows 
-		```cmd
+		```cmd  
 		npm install --global windows-build-tools
 		```
 1. Get into crove-bot folder
