@@ -9,12 +9,16 @@ module.exports = async (client, message) => {
     await voice_api.join(client, message);
     const args = message.content.trim().split(/ +/g);
     message.delete();
-    if (args.indexOf(`${config.prefix}p` || args.indexOf(`p`))) {
+    if (args.indexOf(`${config.prefix}p`) > -1) {
         playlist.parse(client, message, args);
         return;
     }
-    if (!url_pattern.test(message.content)) { message.reply("Send valid url").then(e => { setTimeout(() => { e.delete(); message.delete(); }, 5000); }); return; }
+    if (!url_pattern.test(message.content)) {
+        youtube.sr(client, message);
+        return;
+    }
     if (ytdl.validateURL(message.content)) {
         youtube.queue(client, message);
+        return;
     }
 };

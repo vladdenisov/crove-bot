@@ -1,4 +1,5 @@
 const ytdl = require('ytdl-core');
+const ytsr = require('ytsr');
 const { MessageEmbed } = require('discord.js');
 const voice_api = require('./voice_api');
 //Add song to server queue
@@ -22,7 +23,24 @@ exports.queue = async (client, message) => {
         secMsg.edit(`***Queue List: \n*** ${m.join("")}`);
     });
 };
+//Search function for YouTube
+exports.sr = async (client, message) => {
+    await ytsr(message.content, { limit: 1 }, (error, result) => {
+        if (error) {
+            console.log(error);
+            return;
+        }
+        const el = result.items[0];
+        servers[message.guild.id].queue.push({
+            url: el.link,
+            title: el.title,
+            length: el.duration,
+            thumbnail: el.thumbnail
+        });
+        this.play(client, message);
+    });
 
+};
 //Play first song in queue
 exports.play = async (client, message) => {
     let server = servers[message.guild.id];
