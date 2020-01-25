@@ -25,7 +25,7 @@ exports.queue = async (client, message) => {
 };
 //Search function for YouTube
 exports.sr = async (client, message) => {
-    await ytsr(message.content, { limit: 1 }, (error, result) => {
+    await ytsr(message.content, { limit: 1 }, async (error, result) => {
         if (error) {
             console.log(error);
             return;
@@ -37,6 +37,16 @@ exports.sr = async (client, message) => {
             length: el.duration,
             thumbnail: el.thumbnail
         });
+        if (servers[message.guild.id].queue[1]) {
+            await message.channel.messages.fetch().then((messages) => {
+                messages = Array.from(messages);
+                let secMsg = messages[messages.length - 2][1];
+                let m = [], t = 0;
+                servers[message.guild.id].queue.map((el) => { if (t === 0) { t++; return; } else if (t > 20) { return; } else { t++; m.push(`${t - 1}. **${el.title}** __Length: ${el.length}__\n`); } });
+                secMsg.edit(`***Queue List: \n*** ${m.join("")}`);
+            });
+            return;
+        }
         this.play(client, message);
     });
 
