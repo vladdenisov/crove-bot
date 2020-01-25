@@ -12,11 +12,11 @@ exports.queue = async (client, message) => {
         thumbnail: video_info.player_response.videoDetails.thumbnail.thumbnails[video_info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
     });
     //If added song is first: then start playing
-    if (!servers[message.guild.id].queue[1]) {exports.play(client, message); return;}
+    if (!servers[message.guild.id].queue[1]) { exports.play(client, message); return; }
     //Else: edit queue message
     await message.channel.messages.fetch().then((messages) => {
         messages = Array.from(messages);
-        let secMsg = messages[messages.length - 2][1]; 
+        let secMsg = messages[messages.length - 2][1];
         let m = [], t = 0;
         servers[message.guild.id].queue.map((el) => { if (t === 0) { t++; return; } else if (t > 20) { return; } else { t++; m.push(`${t - 1}. **${el.title}** __Length: ${el.length}__\n`); } });
         secMsg.edit(`***Queue List: \n*** ${m.join("")}`);
@@ -25,7 +25,6 @@ exports.queue = async (client, message) => {
 
 //Play first song in queue
 exports.play = async (client, message) => {
-    console.log(servers[message.guild.id].queue);
     let server = servers[message.guild.id];
     try {
         server.dispatcher = server.connection.play(ytdl(server.queue[0].url, {
@@ -33,12 +32,11 @@ exports.play = async (client, message) => {
             highWaterMark: 1 << 25 //To prevent unexpected end of video
         }));
         server.dispatcher.on('end', async () => {
-            console.log(server.queue);
             server.queue.shift();
-            if (!server.queue[0]) {await voice_api.leave(client, message); return;}
+            if (!server.queue[0]) { await voice_api.leave(client, message); return; }
             this.play(client, message);
             return;
-    
+
         });
         server.dispatcher.on('error', (error) => {
             console.log(error);
