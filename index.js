@@ -11,11 +11,11 @@ const client = new Discord.Client();
 //Initialize commands enmap
 client.commands = new Enmap();
 //Create global object with servers
-global.servers = { };
+global.servers = {};
 //Console.log that bot is ready and set bot activity
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity(config.game_name);
+    client.user.setActivity(config.activity);
 });
 //Load all files with commands
 fs.readdir('./commands/', (err, files) => {
