@@ -1,7 +1,7 @@
 # Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot)
-<img src="https://image.flaticon.com/icons/svg/122/122320.svg" align="right" width="80" height="60"/>
+<img src="https://image.flaticon.com/icons/svg/122/122320.svg" align="right" width="80" height="40"/>
 Crove can play music from **Youtube, Spotify** and It has many other commands such as *purge, kick, 8ball*, etc.  
-</br></br>
+</br>
 
 ![](http://g.recordit.co/GpyFAaaINI.gif)
 
