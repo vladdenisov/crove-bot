@@ -16,7 +16,7 @@
     "ytdl"
   ],
   "author": "Vlad Denisov",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
     "discord.js": "github:discordjs/discord.js",
