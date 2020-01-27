@@ -1,7 +1,6 @@
 //File to handle Reactions changes
 const voice_api = require('./voice_api');
 exports.hook = async (client, message) => {
-    console.log("Hooked");
     client.on('raw', event => {
         server = servers[message.guild.id];
         let mRCH = message.guild.channels.find(channel => channel.name === "music_req");
