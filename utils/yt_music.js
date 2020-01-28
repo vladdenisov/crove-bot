@@ -49,7 +49,6 @@ exports.sr = async (client, message) => {
         }
         this.play(client, message);
     });
-
 };
 //Play first song in queue
 exports.play = async (client, message) => {
