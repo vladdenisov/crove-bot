@@ -12,6 +12,7 @@ exports.queue = async (client, message) => {
         title: video_info.title,
         thumbnail: video_info.player_response.videoDetails.thumbnail.thumbnails[video_info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
     });
+    //console.log(video_info);
     //If added song is first: then start playing
     if (!servers[message.guild.id].queue[1]) { exports.play(client, message); return; }
     //Else: edit queue message
