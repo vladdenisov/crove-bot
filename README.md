@@ -1,4 +1,4 @@
-# Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Greenkeeper badge](https://badges.greenkeeper.io/vladdenisov/crove-bot.svg)](https://greenkeeper.io/)
+# Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json)
 <img src="https://image.flaticon.com/icons/svg/122/122320.svg" align="right" width="80" height="40"/>
 Crove can play music from **Youtube, Spotify** and It has many other commands such as *purge, kick, 8ball*, etc.  
 </br>
