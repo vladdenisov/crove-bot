@@ -4,7 +4,8 @@
   "description": "Simple Bot For Discord",
   "main": "index.js",
   "scripts": {
-    "test": "echo At this point, the build has succeded and the bot should've been tested, but I don't want to run the bot from the CI."
+    "test": "echo At this point, the build has succeded and the bot should've been tested, but I don't want to run the bot from the CI.",
+    "lint": "eslint ./utils/* --fix"
   },
   "keywords": [
     "bot",
@@ -23,13 +24,14 @@
     "enmap": "^5.2.4",
     "ffmpeg-static": "^4.0.0",
     "node-opus": "^0.3.3",
+    "spotify-web-api-node": "^4.0.0",
     "ytdl-core": "^1.0.6",
     "ytpl": "^0.1.20",
     "ytsr": "github:vladdenisov/node-ytsr"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1"
   }
 }

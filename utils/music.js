@@ -2,6 +2,7 @@ const ytdl = require('ytdl-core');
 const youtube = require('./yt_music');
 const VOICE_API = require('./voice_api');
 const playlist = require('./playlist_yt');
+const spotify = require('./spotify');
 const config = require('../config.json');
 // Pattern for url check
 const URL_PATTERN = /^(?:\w+:)?\/\/(\S+)$/;
@@ -19,5 +20,9 @@ module.exports = async (client, message) => {
   }
   if (ytdl.validateURL(message.content)) {
     youtube.queue(client, message);
+    return;
+  }
+  if (message.content.indexOf('spotify') > -1) {
+    spotify.play(client, message);
   }
 };

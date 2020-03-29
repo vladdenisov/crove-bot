@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 const ytdl = require('ytdl-core');
 const ytsr = require('ytsr');
@@ -26,8 +28,9 @@ exports.queue = async (client, message) => {
   });
 };
 // Search function for YouTube
-exports.sr = async (client, message) => {
-  await ytsr(message.content, { limit: 1 }, async (error, result) => {
+exports.sr = async (client, message, query, data = '') => {
+  if (!query) query = message.content;
+  await ytsr(query, { limit: 1 }, async (error, result) => {
     if (error) {
       console.log(error);
       return;
@@ -35,17 +38,19 @@ exports.sr = async (client, message) => {
     const el = result.items[0];
     servers[message.guild.id].queue.push({
       url: el.link,
-      title: el.title,
+      title: data !== '' ? `${data.artists.join(', ')} - ${data.name}` : el.title,
       length: el.duration,
-      thumbnail: el.thumbnail,
+      thumbnail: data !== '' ? data.cover : el.thumbnail,
+      spotifyURL: data !== '' ? data.url : el.link,
     });
     if (servers[message.guild.id].queue[1]) {
       await message.channel.messages.fetch().then((messages) => {
-        const ARR_MESSAGES = Array.from(messages);
+        messages = Array.from(messages);
+        const secMsg = messages[messages.length - 2][1];
         const m = []; let
           t = 0;
-        servers[message.guild.id].queue.map((song) => { if (t === 0) { t += 1; } else if (t > 20) { return 0; } else { t += 1; m.push(`${t - 1}. **${song.title}** __Length: ${song.length}__\n`); } return 0; });
-        ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`);
+        servers[message.guild.id].queue.map((e) => { if (t === 0) { t += 1; } else if (t > 20) { return 0; } else { t += 1; m.push(`${t - 1}. **${e.title}** __Length: ${e.length}__\n`); } return 0; });
+        secMsg.edit(`***Queue List: \n*** ${m.join('')}`);
       });
       return;
     }
