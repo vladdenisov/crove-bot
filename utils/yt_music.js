@@ -7,7 +7,7 @@ const { MessageEmbed } = require('discord.js');
 const VOICE_API = require('./voice_api');
 // Add song to server queue
 exports.queue = async (client, message) => {
-  const VIDEO_INFO = await ytdl.getBasicInfo(message.content);
+  const VIDEO_INFO = await ytdl.getBasicInfo(message.content).catch((err) => { console.log(err); });
   let s = VIDEO_INFO.length_seconds;
   servers[message.guild.id].queue.push({
     url: message.content,
