@@ -45,12 +45,11 @@ exports.sr = async (client, message, query, data = '') => {
     });
     if (servers[message.guild.id].queue[1]) {
       await message.channel.messages.fetch().then((messages) => {
-        messages = Array.from(messages);
-        const secMsg = messages[messages.length - 2][1];
+        const ARR_MESSAGES = Array.from(messages);
         const m = []; let
           t = 0;
-        servers[message.guild.id].queue.map((e) => { if (t === 0) { t += 1; } else if (t > 20) { return 0; } else { t += 1; m.push(`${t - 1}. **${e.title}** __Length: ${e.length}__\n`); } return 0; });
-        secMsg.edit(`***Queue List: \n*** ${m.join('')}`);
+        servers[message.guild.id].queue.map((song) => { if (t === 0) { t += 1; } else if (t > 20) { return 0; } else { t += 1; m.push(`${t - 1}. **${song.title}** __Length: ${song.length}__\n`); } return 0; });
+        ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`);
       });
       return;
     }
