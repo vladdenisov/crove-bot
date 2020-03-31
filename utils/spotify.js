@@ -43,7 +43,7 @@ const handlePlaylist = async (client, message, ID) => {
   const data = await spotifyApi.getPlaylist(ID, { pageSize: 200, limit: 200 })
     .catch((err) => console.log(err));
   data.body.tracks.items.map((e) => handleTrack(client, message, e.track.id));
-  message.channel.send(`Added ${data.body.tracks.total} from ${data.body.name} - ${data.body.owner.display_name} playlist`)
+  message.channel.send(`Added ${data.body.tracks.total} from **${data.body.name}** playlist by **${data.body.owner.display_name}**`)
     .then((e) => setTimeout(() => e.delete(), 2000));
 };
 // Main function
@@ -51,9 +51,15 @@ const play = async (client, message) => {
   await auth();
   const URL = message.content;
   const ID = getID(URL);
-  if (URL.search('album') > 1) handleAlbum(client, message, ID);
-  if (URL.search('track') > 1) handleTrack(client, message, ID);
-  if (URL.search('playlist') > 1) handlePlaylist(client, message, ID);
-  else message.channel.send('Invalid link').then((e) => setTimeout(() => e.delete(), 2000));
+  if (URL.search('album') > 1) {
+    handleAlbum(client, message, ID); return;
+  }
+  if (URL.search('track') > 1) {
+    handleTrack(client, message, ID); return;
+  }
+  if (URL.search('playlist') > 1) {
+    handlePlaylist(client, message, ID); return;
+  }
+  message.channel.send('Invalid link').then((e) => setTimeout(() => e.delete(), 2000));
 };
 module.exports = { play };
