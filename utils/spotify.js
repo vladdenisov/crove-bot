@@ -27,6 +27,13 @@ const handleTrack = async (client, message, ID) => {
   const query = `${TRACKDATA.name} ${TRACKDATA.artists.join(', ')}`;
   youtube.sr(client, message, query, TRACKDATA);
 };
+const handlePlaylist = async (client, message, ID) => {
+  const data = await spotifyApi.getPlaylist(ID, { pageSize: 200, limit: 200 })
+    .catch((err) => console.log(err));
+  data.body.tracks.items.map((e) => handleTrack(client, message, e.track.id));
+  message.channel.send(`Added ${data.body.tracks.total} from ${data.body.name} - ${data.body.owner.display_name}`)
+    .then((e) => setTimeout(() => e.delete(), 2000));
+};
 const play = async (client, message) => {
   await auth();
   const URL = message.content;
@@ -34,7 +41,6 @@ const play = async (client, message) => {
   // eslint-disable-next-line no-undef
   if (URL.search('album') > 1) handleAlbum(ID);
   if (URL.search('track') > 1) handleTrack(client, message, ID);
-  // eslint-disable-next-line no-undef
-  if (URL.search('playlist') > 1) handlePlaylist(ID);
+  if (URL.search('playlist') > 1) handlePlaylist(client, message, ID);
 };
 module.exports = { play };
