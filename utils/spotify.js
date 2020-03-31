@@ -54,5 +54,6 @@ const play = async (client, message) => {
   if (URL.search('album') > 1) handleAlbum(client, message, ID);
   if (URL.search('track') > 1) handleTrack(client, message, ID);
   if (URL.search('playlist') > 1) handlePlaylist(client, message, ID);
+  else message.channel.send('Invalid link').then((e) => setTimeout(() => e.delete(), 2000));
 };
 module.exports = { play };
