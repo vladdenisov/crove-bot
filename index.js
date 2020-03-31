@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable global-require */
 // Include all dependencies
 const Discord = require('discord.js');
