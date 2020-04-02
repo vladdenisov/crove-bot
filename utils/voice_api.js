@@ -15,7 +15,6 @@ exports.join = async (client, message) => {
           reactions.hook(client, message);
         }
         if (servers[message.guild.id].connection === connection) return;
-
         servers[message.guild.id].connection = connection;
         servers[message.guild.id].queue = [];
       }).catch((e) => { throw (e); });

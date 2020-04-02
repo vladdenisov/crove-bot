@@ -15,7 +15,6 @@ exports.queue = async (client, message) => {
     title: VIDEO_INFO.title,
     thumbnail: VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails[VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails.length - 1].url,
   });
-  // console.log(VIDEO_INFO);
   // If added song is first: then start playing
   if (!servers[message.guild.id].queue[1]) { exports.play(client, message); return; }
   // Else: edit queue message
@@ -93,7 +92,6 @@ exports.play = async (client, message) => {
         .addField('Now Playing', `[${server.queue[0].title}](${server.queue[0].thumbnail.indexOf('scdn') > 1 ? server.queue[0].spotifyURL : server.queue[0].url})`)
         .addField('Length: ', server.queue[0].length);
       ARR_MESSAGES[ARR_MESSAGES.length - 1][1].edit(eEmbed);
-      // first_message.react("⏭").then(() => first_message.react('⏯')).then(() => first_message.react('⏹'));
       server.queue.map((song) => { if (t === 0) { t += 1; } else if (t > 20) { return 0; } else { t += 1; m.push(`${t - 1}. **${song.title}** __Length: ${song.length}__\n`); } return 0; });
       ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`);
     });
