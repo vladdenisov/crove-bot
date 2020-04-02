@@ -18,9 +18,9 @@ exports.join = async (client, message) => {
 
         servers[message.guild.id].connection = connection;
         servers[message.guild.id].queue = [];
-      });
+      }).catch((e) => { throw (e); });
   } else {
-    message.reply('You need to join a voice channel first!');
+    throw new Error('NO_CHANNEL');
   }
 };
 exports.leave = async (client, message) => {

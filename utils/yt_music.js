@@ -30,12 +30,13 @@ exports.queue = async (client, message) => {
 // Search function for YouTube
 exports.sr = async (client, message, query, data = '') => {
   if (!query) query = message.content;
-  await ytsr(query, { limit: 1 }, async (error, result) => {
+  await ytsr(query, { limit: 4 }, async (error, result) => {
     if (error) {
       console.log(error);
       return;
     }
-    const el = result.items[0];
+    let el;
+    result.items.some((e) => { if (e.type === 'video') { el = e; } return 0; });
     servers[message.guild.id].queue.push({
       url: el.link,
       title: data !== '' ? `${data.artists.join(', ')} - ${data.name}` : el.title,
@@ -43,6 +44,10 @@ exports.sr = async (client, message, query, data = '') => {
       thumbnail: data !== '' ? data.cover : el.thumbnail,
       spotifyURL: data !== '' ? data.url : el.link,
     });
+    if (data === '') {
+      const VIDEO_INFO = await ytdl.getBasicInfo(el.link).catch((err) => { console.log(err); });
+      servers[message.guild.id].queue[servers[message.guild.id].queue.length - 1].thumbnail = VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails[VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails.length - 1].url;
+    }
     if (servers[message.guild.id].queue[1]) {
       await message.channel.messages.fetch().then((messages) => {
         const ARR_MESSAGES = Array.from(messages);
