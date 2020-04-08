@@ -34,8 +34,11 @@ exports.sr = async (client, message, query, data = '') => {
       console.log(error);
       return;
     }
-    let el;
-    result.items.some((e) => { if (e.type === 'video') { el = e; } return 0; });
+    let el, i = 0;
+    while (!el) {
+      if (result.items[i].type === 'video') el = result.items[i];
+      else i += 1;
+    }
     servers[message.guild.id].queue.push({
       url: el.link,
       title: data !== '' ? `${data.artists.join(', ')} - ${data.name}` : el.title,
