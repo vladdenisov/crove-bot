@@ -26,7 +26,7 @@ You can try this bot out by inviting using [this link](https://discordapp.com/oa
 		```
 1. Get into crove-bot folder
 	```sh 
-	$ cd simple-discord-bot
+	$ cd crove-bot
 	```
 1. Install node modules
 	```sh 
