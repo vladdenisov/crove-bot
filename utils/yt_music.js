@@ -34,7 +34,8 @@ exports.sr = async (client, message, query, data = '') => {
       console.log(error);
       return;
     }
-    let el, i = 0;
+    let el; let
+      i = 0;
     while (!el) {
       if (result.items[i].type === 'video') el = result.items[i];
       else i += 1;
@@ -72,7 +73,7 @@ exports.play = async (client, message) => {
       // eslint-disable-next-line no-bitwise
       highWaterMark: 1 << 25, // To prevent unexpected end of video
     }));
-    server.dispatcher.on('end', async () => {
+    server.dispatcher.on('finish', async () => {
       server.queue.shift();
       if (!server.queue[0]) { await VOICE_API.leave(client, message); return; }
       this.play(client, message);

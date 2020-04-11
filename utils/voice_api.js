@@ -33,10 +33,12 @@ exports.leave = async (client, message) => {
       .setTitle('Music Bot')
       .setAuthor('Music')
       .setDescription('Playing Music')
-      .setThumbnail('https://cdn.discordapp.com/avatars/573460427753914368/5f6f60497f371261922916793ffbead0.png')
-      .addField('Now Playing', 'Nothing')
-      .addBlankField()
-      .addField('Send link here to play something.', 'Waiting...');
+      .setThumbnail(client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
+      .addFields(
+        { name: 'Now Playing', value: 'Nothing' },
+        { name: '\u200B', value: '\u200B' },
+        { name: 'Send link here to play something.', value: 'Waiting...' },
+      );
     ARR_MESSAGES[ARR_MESSAGES.length - 1][1].edit(eEmbed);
     ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit('***Queue List:***');
   });

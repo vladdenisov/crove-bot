@@ -1,26 +1,40 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 // File to handle Reactions changes
 const VOICE_API = require('./voice_api');
 
-exports.hook = async (client, message) => {
-  client.on('raw', (event) => {
-    const server = servers[message.guild.id];
-    const mRCH = message.guild.channels.find((channel) => channel.name === 'music_req');
-    if ((event.t === 'MESSAGE_REACTION_ADD' || event.t === 'MESSAGE_REACTION_REMOVE') && parseInt(mRCH.id, 10) === parseInt(event.d.channel_id, 10)) {
-      if (message.guild.members.get(event.d.user_id).user.bot) return;
-      if (event.d.emoji.name === '⏭') {
-        server.dispatcher.end();
-      }
-      if (event.d.emoji.name === '⏹') {
-        VOICE_API.leave(client, message);
-      }
-      if (event.d.emoji.name === '⏯') {
-        if (!server.dispatcher.isPaused) {
-          server.dispatcher.isPaused = true; server.dispatcher.pause();
-        } else {
-          server.dispatcher.isPaused = false;
-          server.dispatcher.resume();
-        }
-      }
+const handleReaction = async (client, message, reaction) => {
+  const server = servers[message.guild.id];
+  if (reaction.partial) {
+    try {
+      await reaction.fetch();
+    } catch (error) {
+      console.error('Something went wrong when fetching the message: ', error);
+      return;
     }
+  }
+  if (reaction.message.id !== reaction.message.channel.messages.cache.last().id) return;
+  if (!reaction.message.author.bot) return;
+  if (reaction.emoji.name === '⏭') {
+    server.dispatcher.end();
+  }
+  if (reaction.emoji.name === '⏹') {
+    VOICE_API.leave(client, message);
+  }
+  if (reaction.emoji.name === '⏯') {
+    if (!server.dispatcher.isPaused) {
+      server.dispatcher.isPaused = true; server.dispatcher.pause();
+    } else {
+      server.dispatcher.isPaused = false;
+      server.dispatcher.resume();
+    }
+  }
+};
+exports.hook = async (client, message) => {
+  client.on('messageReactionAdd', async (reaction, _user) => {
+    handleReaction(client, message, reaction);
+  });
+  client.on('messageReactionRemove', async (reaction, _user) => {
+    handleReaction(client, message, reaction);
   });
 };

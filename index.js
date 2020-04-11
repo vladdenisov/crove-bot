@@ -9,7 +9,10 @@ const config = require('./config.json');
 // Include utils files
 const RUN_MUSIC = require('./utils/music');
 // Initialize Discord client
-const client = new Discord.Client();
+const client = new Discord.Client({
+  partials: ['REACTION', 'MESSAGE', 'CHANNEL', 'USER', 'GUILD_MEMBER'],
+  ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES', 'GUILD_MESSAGE_REACTIONS'] },
+});
 // Initialize commands enmap
 client.commands = new Enmap();
 // Create global object with servers
@@ -42,17 +45,18 @@ client.on('guildCreate', (guild) => {
       .setTitle('Music Bot')
       .setAuthor('Music')
       .setDescription('Playing Music')
-      .setThumbnail('https://cdn.discordapp.com/avatars/573460427753914368/5f6f60497f371261922916793ffbead0.png')
-      .addField('Now Playing', 'Nothing')
-      .addBlankField()
-      .addField('Send link here to play something.', 'Waiting...');
+      .setThumbnail(client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
+      .addFields(
+        { name: 'Now Playing', value: 'Nothing' },
+        { name: '\u200B', value: '\u200B' },
+        { name: 'Send link here to play something.', value: 'Waiting...' },
+      );
     // Send messages
     channel.send(eEmbed).then((message) => {
       message.react('⏭').then(() => message.react('⏯')).then(() => message.react('⏹'));
     });
     channel.send('***Queue List:***');
   });
-  // client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
 // Launch command by message
 client.on('message', (message) => {
