@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/order
-const config = require('../config.json')
-const giphy = require('giphy-api')(config.giphy)
+const giphy = require('giphy-api')()
 const { MessageAttachment } = require('discord.js')
 
 // eslint-disable-next-line no-unused-vars
