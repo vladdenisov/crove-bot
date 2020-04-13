@@ -1,5 +1,7 @@
 {
-    "token": "",
-    "prefix": "",
-    "activity": ""
+    "token": "DISCORD TOKEN",
+    "prefix": "COMMAND PREFIX",
+    "activity": "BOT ACTIVITY", 
+    "sp_id": "SPOTIFY ID",
+    "sp_secret": "SPOTIFY SECRET"
 }
