@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo At this point, the build has succeded and the bot should've been tested, but I don't want to run the bot from the CI.",
-    "lint": "eslint ./utils/* --fix"
+    "lint": "eslint \"{,!(node_modules)/**/}*.{js,jsx}\" --fix"
   },
   "keywords": [
     "bot",
@@ -18,11 +18,24 @@
   ],
   "author": "Vlad Denisov",
   "license": "MIT",
+  "eslintConfig": {
+    "extends": "@logux/eslint-config",
+    "rules": {
+      "global-require": "off",
+      "node/no-unpublished-require": "off",
+      "prefer-let/prefer-let": "off",
+      "max-len": "off",
+      "no-invalid-this": "off"
+    },
+    "overrides": [],
+    "globals": {"servers": false}
+  },
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
     "ffmpeg-static": "^4.0.0",
+    "giphy-api": "^2.0.1",
     "node-opus": "^0.3.3",
     "spotify-web-api-node": "^4.0.0",
     "ytdl-core": "^2.0.1",
@@ -30,8 +43,16 @@
     "ytsr": "github:vladdenisov/node-ytsr"
   },
   "devDependencies": {
+    "@logux/eslint-config": "^36.1.2",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.1"
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prefer-let": "^1.0.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-unicorn": "^18.0.1"
   }
 }
