@@ -1,44 +1,79 @@
 # Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json)
-<img src="https://image.flaticon.com/icons/svg/122/122320.svg" align="right" width="80" height="40"/>
-Crove can play music from **Youtube, Spotify** and It has many other commands such as *purge, kick, 8ball*, etc.  
-</br>
 
-![](http://g.recordit.co/GpyFAaaINI.gif)
+Crove can play music from __Youtube, Spotify__ and It has many other commands such as `purge, kick, 8ball`, etc.  
 
-# Usage
-## Invite to your Discord server
-You can try this bot out by inviting using [this link](https://discordapp.com/oauth2/authorize?&client_id=573460427753914368&scope=bot&permissions=8)
+## Getting Started
 
-## Run on your PC/Server
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-1.  Clone this repo
-	```sh
-	$ git clone https://github.com/vladdenisov/crove-bot.git
-	```
-1.  Install build tools
-	- Linux (change package manager if necessary)
-		```sh 
-		$ sudo apt install autoconf libtool g++ make  
-		```
-	- Windows 
-		```cmd  
-		npm install --global windows-build-tools
-		```
-1. Get into crove-bot folder
+### Prerequisites
+
+What things you need to install the software and how to install them
+- __Node.js 12.0.0 or newer is required.__
+- Linux (change package manager if necessary)   
 	```sh 
-	$ cd crove-bot
+	$ sudo apt install autoconf libtool g++ make  
 	```
-1. Install node modules
-	```sh 
-	$ npm install 
-	```
-1. Edit config.json
-1. Run bot
-	```sh 
-	$ node .
+- Windows  
+	```cmd  
+	npm install --global windows-build-tools
 	```
 
+### Installing
 
-# Links
-Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+A step by step series of examples that tell you how to get a development env running
 
+Clone this repo
+```sh
+$ git clone https://github.com/vladdenisov/crove-bot.git
+```
+Get into crove-bot folder
+```sh 
+$ cd crove-bot
+```
+
+Install node modules
+```sh 
+$ npm install 
+```
+
+Edit config.json (use example config and replace values)
+```sh
+nano config.json
+```
+Start bot
+```sh
+npm run start
+```
+
+## Deployment
+
+Install bot on your server and run: 
+```sh
+npm run server
+```
+
+## Built With
+
+* [DiscordJS](https://github.com/discordjs/discord.js) - The Discord API framework used
+* [ytdl-core](https://github.com/fent/node-ytdl-core) - YouTube API framework
+* [ytpl](https://github.com/TimeForANinja/node-ytpl) - Used to handle YouTube playlists
+* [ytsr](https://github.com/TimeForANinja/node-ytsr) - Used to handle YouTube search
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Vlad Denisov** - *Base work* - [vladdenisov](https://github.com/vladdenisov)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
