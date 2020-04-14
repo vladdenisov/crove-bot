@@ -11,3 +11,8 @@ exports.run = async (client, message, _args) => {
     message.channel.send(message.mentions.users.first() ? `<@${ message.mentions.users.first().id }>` : '', attachment)
   })
 }
+exports.help = {
+  name: '`hug`',
+  description: 'Hug someone',
+  usage: 'hug @user'
+}

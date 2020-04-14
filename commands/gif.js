@@ -14,3 +14,8 @@ exports.run = async (client, message, args) => {
     message.channel.send(message.mentions.users.first() ? `<@${ message.mentions.users.first().id }>` : '', attachment)
   })
 }
+exports.help = {
+  name: '`gif`',
+  description: 'Search gifs on `giphy`',
+  usage: 'gif <query>'
+}

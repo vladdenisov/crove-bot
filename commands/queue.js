@@ -54,3 +54,8 @@ exports.run = async (client, message, args) => {
     }
   }
 }
+exports.help = {
+  name: '`queue`',
+  description: 'Show queue | Remove from queue (`rm`) | Swap places (`mv`)',
+  usage: 'queue | queue rm `number` | queue mv `number` `number`'
+}

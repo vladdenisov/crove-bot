@@ -30,3 +30,8 @@ exports.run = async (client, message, args) => {
   message.channel.send(`Successfully deleted ${ deleteCount } ${ deleteCount === 1 ? 'message' : 'messages' }.`).then(el => setTimeout(() => el.delete(), 3000))
   return 0
 }
+exports.help = {
+  name: '`purge`',
+  description: 'Delete messages',
+  usage: 'purge `nubmer of messages to delete (default: 1)`'
+}

@@ -1,5 +1,5 @@
 {
-  "name": "crove-bot",
+  "name": "@vladdenisov/crove-bot",
   "version": "0.1.0",
   "description": "Simple Bot For Discord",
   "main": "index.js",
@@ -9,6 +9,9 @@
     "start": "node .",
     "server": "forever start --id \"crove\" index.js",
     "stop": "forever stop --id \"crove\" index.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "bot",
@@ -37,10 +40,12 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
+    "color-thief-node": "^1.0.3",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
     "ffmpeg-static": "^4.0.0",
     "giphy-api": "^2.0.1",
+    "node-fetch": "^2.6.0",
     "node-opus": "^0.3.3",
     "spotify-web-api-node": "^4.0.0",
     "ytdl-core": "^2.0.1",
