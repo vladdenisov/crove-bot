@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo At this point, the build has succeded and the bot should've been tested, but I don't want to run the bot from the CI.",
-    "lint": "eslint \"{,!(node_modules)/**/}*.{js,jsx}\" --fix"
+    "lint": "eslint \"{,!(node_modules)/**/}*.{js,jsx}\" --fix",
+    "start": "node .",
+    "server": "forever start --id \"crove\" index.js",
+    "stop": "forever stop --id \"crove\" index.js"
   },
   "keywords": [
     "bot",
@@ -28,7 +31,9 @@
       "no-invalid-this": "off"
     },
     "overrides": [],
-    "globals": {"servers": false}
+    "globals": {
+      "servers": false
+    }
   },
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
@@ -53,6 +58,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-unicorn": "^18.0.1"
+    "eslint-plugin-unicorn": "^18.0.1",
+    "forever": "^2.0.0"
   }
 }
