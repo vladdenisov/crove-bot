@@ -1,4 +1,4 @@
-# Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json) ![GitHub repo size](https://img.shields.io/github/repo-size/vladdenisov/crove-bot) ![GitHub](https://img.shields.io/github/license/vladdenisov/crove-bot)
+# Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/vladdenisov/crove-bot) ![GitHub repo size](https://img.shields.io/github/repo-size/vladdenisov/crove-bot) ![GitHub](https://img.shields.io/github/license/vladdenisov/crove-bot) 
 
 Crove can play music from __Youtube, Spotify__ and It has many other commands such as `purge, kick, 8ball`, etc.  
 
