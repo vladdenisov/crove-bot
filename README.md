@@ -1,4 +1,4 @@
-# Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json)
+# Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json) ![GitHub repo size](https://img.shields.io/github/repo-size/vladdenisov/crove-bot) ![GitHub](https://img.shields.io/github/license/vladdenisov/crove-bot)
 
 Crove can play music from __Youtube, Spotify__ and It has many other commands such as `purge, kick, 8ball`, etc.  
 
@@ -39,18 +39,18 @@ $ npm install
 
 Edit config.json (use example config and replace values)
 ```sh
-nano config.json
+$ nano config.json
 ```
 Start bot
 ```sh
-npm run start
+$ npm run start
 ```
 
 ## Deployment
 
 Install bot on your server and run: 
 ```sh
-npm run server
+$ npm run server
 ```
 
 ## Built With
