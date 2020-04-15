@@ -1,6 +1,6 @@
 const ytpl = require('ytpl')
 
-const youtube = require('./yt_music')
+const youtube = require('./youtube')
 
 exports.parse = async (client, message, args) => {
   const url = args.map(el => { if (ytpl.validateURL(el)) return el; return '' }).join('')

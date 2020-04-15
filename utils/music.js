@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 const ytdl = require('ytdl-core')
 
-const youtube = require('./yt_music')
+const youtube = require('./youtube')
 const VOICE_API = require('./voice_api')
 const playlist = require('./playlist_yt')
 const spotify = require('./spotify')
@@ -10,7 +10,7 @@ const config = require('../config.json')
 // Pattern for url check
 // eslint-disable-next-line security/detect-unsafe-regex
 const URL_PATTERN = /^(?:\w+:)?\/\/(\S+)$/
-module.exports = async (client, message) => {
+exports.run = async (client, message) => {
   message.delete()
   try {
     await VOICE_API.join(client, message)

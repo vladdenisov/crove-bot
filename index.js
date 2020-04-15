@@ -8,7 +8,7 @@ const Enmap = require('enmap')
 // Include config file
 const config = require('./config.json')
 // Include utils files
-const RUN_MUSIC = require('./utils/music')
+const music = require('./utils/music')
 // Initialize Discord client
 const client = new Discord.Client({
   partials: ['REACTION', 'MESSAGE', 'CHANNEL', 'USER', 'GUILD_MEMBER'],
@@ -70,7 +70,7 @@ client.on('message', message => {
   if (message.content.indexOf(config.prefix) !== 0) {
     // Except for messages in "music_req" channel. Launch Music command
     if (message.channel.name === 'music_req') {
-      RUN_MUSIC(client, message, ['message'])
+      music.run(client, message)
       return
     }
     return
@@ -85,5 +85,9 @@ client.on('message', message => {
   // Run command
   cmd.run(client, message, args)
 })
+
+// Catch UnhandledPromiseRejectionWarnings
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error))
+
 // Final bot login
 client.login(config.token)
