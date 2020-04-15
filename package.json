@@ -1,6 +1,6 @@
 {
   "name": "@vladdenisov/crove-bot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple Bot For Discord",
   "main": "index.js",
   "scripts": {
@@ -49,6 +49,7 @@
     "node-fetch": "^2.6.0",
     "node-opus": "^0.3.3",
     "spotify-web-api-node": "^4.0.0",
+    "yargs-parser": "^13.1.2",
     "ytdl-core": "^2.0.1",
     "ytpl": "^0.1.20",
     "ytsr": "github:vladdenisov/node-ytsr"
