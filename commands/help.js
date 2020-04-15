@@ -10,7 +10,6 @@ exports.run = (client, message, args) => {
       .setDescription('**Some cool stuff I can do:**')
     client.commands.map(cmd => {
       embed.addField('\u200b', `__**Name:**__ *${ cmd.help.name }*\n__**Description:**__  *${ cmd.help.description }*\n__**Usage:**__  *${ cmd.help.usage }*`)
-      console.log(cmd.help)
     })
   }
   embed.addField('\u200b', `__**Current Prefix**__: \`${ prefix }\``)

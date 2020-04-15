@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     .setColor(c)
     .setTitle(`**${ c }**`)
     .setImage(`https://dummyimage.com/100x100/${ c.slice(1) }.jpg&text=+`)
-  message.channel.send(embed).catch(e => console.log(e.message))
+  message.channel.send(embed).catch(e => console.error(e.message))
   return 0
 }
 
