@@ -45,6 +45,7 @@
     "enmap": "^5.2.4",
     "ffmpeg-static": "^4.0.0",
     "giphy-api": "^2.0.1",
+    "ibm-watson": "^5.4.0",
     "node-fetch": "^2.6.0",
     "node-opus": "^0.3.3",
     "spotify-web-api-node": "^4.0.0",
