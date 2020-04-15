@@ -5,7 +5,7 @@ const ytdl = require('ytdl-core')
 const ytsr = require('ytsr')
 const { MessageEmbed } = require('discord.js')
 
-const VOICE_API = require('./voice_api')
+const voice = require('../api/voice')
 // Add song to server queue
 exports.queue = async (client, message) => {
   const VIDEO_INFO = await ytdl.getBasicInfo(message.content).catch(err => { console.log(err) })
@@ -76,7 +76,7 @@ exports.play = async (client, message) => {
     }))
     server.dispatcher.on('finish', async () => {
       server.queue.shift()
-      if (!server.queue[0]) { await VOICE_API.leave(client, message); return }
+      if (!server.queue[0]) { await voice.leave(client, message); return }
       this.play(client, message)
     })
     server.dispatcher.on('error', error => {

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 // File to handle Reactions changes
-const VOICE_API = require('./voice_api')
+const VOICE_API = require('./voice')
 
 const handleReaction = async (client, message, reaction) => {
   const server = servers[message.guild.id]

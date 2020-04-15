@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js')
 
-const color = require('../utils/color')
+const color = require('../utils/api/color')
 
 exports.run = async (client, message, args) => {
   let url = message.attachments.first()

@@ -3,17 +3,17 @@
 const ytdl = require('ytdl-core')
 
 const youtube = require('./youtube')
-const VOICE_API = require('./voice_api')
+const voice = require('../api/voice')
 const playlist = require('./playlist_yt')
 const spotify = require('./spotify')
-const config = require('../config.json')
+const config = require('../../config.json')
 // Pattern for url check
 // eslint-disable-next-line security/detect-unsafe-regex
 const URL_PATTERN = /^(?:\w+:)?\/\/(\S+)$/
 exports.run = async (client, message) => {
   message.delete()
   try {
-    await VOICE_API.join(client, message)
+    await voice.join(client, message)
   } catch (e) {
     if (e.message === 'NO_CHANNEL') message.reply('You need to join a voice channel first!').then(a => setTimeout(() => a.delete(), 2000))
     else console.error(e)

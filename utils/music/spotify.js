@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const SpotifyWebApi = require('spotify-web-api-node')
 
-const config = require('../config.json')
+const config = require('../../config.json')
 const youtube = require('./youtube')
 // Init Spotify Api with Credentials from config
 const spotifyApi = new SpotifyWebApi({

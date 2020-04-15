@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
 const { MessageEmbed } = require('discord.js')
 
-const mal = require('../utils/mal')
-const colors = require('../utils/color')
+const mal = require('../utils/api/mal')
+const colors = require('../utils/api/color')
 
 exports.run = (client, message, args) => {
   let url = message.attachments.first()

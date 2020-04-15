@@ -1,3 +1,4 @@
+'use strict'
 /* eslint-disable no-console */
 /* eslint-disable global-require */
 // Include all dependencies
@@ -8,7 +9,7 @@ const Enmap = require('enmap')
 // Include config file
 const config = require('./config.json')
 // Include utils files
-const music = require('./utils/music')
+const music = require('./utils/music/music')
 // Initialize Discord client
 const client = new Discord.Client({
   partials: ['REACTION', 'MESSAGE', 'CHANNEL', 'USER', 'GUILD_MEMBER'],
