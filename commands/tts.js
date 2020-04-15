@@ -10,3 +10,9 @@ exports.run = (client, message, args) => {
   }
   tts.speak(client, message, args.join(' '), voice)
 }
+
+exports.help = {
+  name: '`tts`',
+  description: 'Translate text to speech, connect to voice channel to use it',
+  usage: 'tts `text`'
+}

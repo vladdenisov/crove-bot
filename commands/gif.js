@@ -17,5 +17,5 @@ exports.run = async (client, message, args) => {
 exports.help = {
   name: '`gif`',
   description: 'Search gifs on `giphy`',
-  usage: 'gif <query>'
+  usage: 'gif `query`'
 }
