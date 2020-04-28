@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "@discordjs/opus": "^0.1.0",
+    "@discordjs/opus": "^0.2.1",
     "color-thief-node": "^1.0.3",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
