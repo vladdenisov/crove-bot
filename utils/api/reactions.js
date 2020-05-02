@@ -6,7 +6,6 @@ const VOICE_API = require('./voice')
 const handleReaction = async (client, message, reaction) => {
   const server = servers[message.guild.id]
   if (reaction.message.channel.name !== 'music_req') return
-  if (reaction.message.id !== reaction.message.channel.messages.cache.last().id) return
   if (!reaction.message.author.bot) return
   if (reaction.emoji.name === '⏭') {
     server.dispatcher.end()
