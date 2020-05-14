@@ -49,12 +49,10 @@
     "giphy-api": "^2.0.1",
     "ibm-watson": "^5.4.0",
     "node-fetch": "^2.6.0",
-    "node-opus": "^0.3.3",
     "spotify-web-api-node": "^4.0.0",
-    "yargs-parser": "^13.1.2",
-    "ytdl-core": "^2.0.1",
-    "ytpl": "^0.1.20",
-    "ytsr": "github:vladdenisov/node-ytsr",
+    "ytdl-core": "^2.1.2",
+    "ytpl": "^0.1.21",
+    "ytsr": "^0.1.13",
     "snyk": "^1.316.1"
   },
   "devDependencies": {
