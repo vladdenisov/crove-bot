@@ -12,7 +12,7 @@ lavalink:
       vimeo: true
       mixer: true
       http: true
-      local: false
+      local: true
     bufferDurationMs: 400
     youtubePlaylistLoadLimit: 6 # Number of pages at 100 each
     youtubeSearchEnabled: true
@@ -30,7 +30,7 @@ sentry:
 logging:
   file:
     max-history: 30
-    max-size: 1GB
+    max-size: 0.1GB
   path: ./logs/
 
   level:
