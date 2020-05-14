@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js')
 
-exports.run = async (client, message, _args) => {
+exports.run = async (client, message) => {
   message.delete()
   if (!servers[message.guild.id].player) return
   if (!servers[message.guild.id].queue[0]) return
@@ -13,7 +13,7 @@ exports.run = async (client, message, _args) => {
   embed.setColor(`#${ ((1 << 24) * Math.random() | 0).toString(16) }`)
   embed.setTitle(`${ servers[message.guild.id].queue[0].info.title }`)
   embed.addField('Current play time: ', `${ '▬'.repeat(Math.floor(c)) }🔵${ '▬'.repeat(Math.floor(cr)) } ${ (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s }/${ servers[message.guild.id].queue[0].info.length }`)
-  embed.setURL(`${servers[message.guild.id].queue[0].info.uri}`)
+  embed.setURL(`${ servers[message.guild.id].queue[0].info.uri }`)
   message.channel.send(embed).then(e => setTimeout(() => e.delete(), 10000))
 }
 exports.help = {
