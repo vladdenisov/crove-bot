@@ -10,7 +10,8 @@
     "server": "forever start --id \"crove\" index.js",
     "stop": "forever stop --id \"crove\" index.js",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "lavalink": "java -jar Lavalink.jar"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -42,18 +43,20 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "@lavacord/discord.js": "0.0.6",
     "color-thief-node": "^1.0.3",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
     "ffmpeg-static": "^4.0.0",
     "giphy-api": "^2.0.1",
     "ibm-watson": "^5.4.0",
+    "lavacord": "github:lavacord/lavacord",
     "node-fetch": "^2.6.0",
+    "snyk": "^1.316.1",
     "spotify-web-api-node": "^4.0.0",
     "ytdl-core": "^2.1.2",
     "ytpl": "^0.1.21",
-    "ytsr": "^0.1.13",
-    "snyk": "^1.316.1"
+    "ytsr": "^0.1.13"
   },
   "devDependencies": {
     "@logux/eslint-config": "^36.1.2",
