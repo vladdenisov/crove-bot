@@ -81,7 +81,7 @@ const play = async (server, client, message) => {
         .setAuthor('Music')
         .setDescription('Playing Music')
         .setImage(server.queue[0].info.image || client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
-        .addField('Now Playing', `[${ server.queue[0].info.title }](${server.queue[0].info.uri})`)
+        .addField('Now Playing', `[${ server.queue[0].info.title }](${ server.queue[0].info.uri })`)
         .addField('Length: ', server.queue[0].info.length)
       messages[messages.length - 1][1].edit(eEmbed)
       server.queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ song.info.title }** __Length: ${ song.info.length }__\n`) } return 0 })
