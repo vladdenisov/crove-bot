@@ -31,6 +31,9 @@ client.on('ready', async () => {
     user: client.user.id, // Client id
     shards: (client.shard && client.shard.count) || 1
   })
+  client.manager.on('ready', node => console.log(`${ node.host }: Is ready`))
+  client.manager.on('disconnect', (node, event) => console.log(`${ node.host }: Disconnected with code ${ event.code } and reason ${ event.reason || 'No Reason Specified' }`))
+  client.manager.on('error', (node, error) => console.error(node.host, error))
   client.manager.connect()
 })
 // Load all files with commands

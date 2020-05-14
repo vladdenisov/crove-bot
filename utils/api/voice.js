@@ -25,6 +25,7 @@ exports.join = async (client, message) => {
 exports.leave = async (client, message) => {
   if (!message.member.voice.channel) return
   servers[message.guild.id].player.destroy()
+  client.manager.leave(message.guild.id)
   message.channel.messages.fetch().then(messages => {
     const ARR_MESSAGES = Array.from(messages)
     const eEmbed = new MessageEmbed()
