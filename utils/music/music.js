@@ -66,6 +66,7 @@ const play = async (server, client, message) => {
     }
     if (!server.queue[0]) {
       voice.leave(client, message)
+      return
     }
     play(server, client, message)
   })
