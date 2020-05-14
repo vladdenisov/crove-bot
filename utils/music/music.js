@@ -1,15 +1,21 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-console */
-const ytdl = require('ytdl-core')
+const fetch = require('node-fetch')
 
-const youtube = require('./youtube')
 const voice = require('../api/voice')
-const playlist = require('./playlist_yt')
-const spotify = require('./spotify')
-const config = require('../../config.json')
-// Pattern for url check
-// eslint-disable-next-line security/detect-unsafe-regex
-const URL_PATTERN = /^(?:\w+:)?\/\/(\S+)$/
+const getSongs = async (server, search) => {
+  const node = { host: 'localhost', port: 2333, password: 'youshallnotpass' }
+
+  // eslint-disable-next-line node/no-unsupported-features/node-builtins
+  const params = new URLSearchParams()
+  params.append('identifier', search)
+
+  return fetch(`http://${ node.host }:${ node.port }/loadtracks?${ params }`, { headers: { Authorization: node.password } })
+    .then(res => res.json())
+    .then(data => data.tracks)
+    .catch(err => {
+      console.error(err)
+      return null
+    })
+}
 exports.run = async (client, message) => {
   message.delete()
   try {
@@ -20,20 +26,7 @@ exports.run = async (client, message) => {
     return e
   }
   const args = message.content.trim().split(/ +/g)
-  if (args.includes(`${ config.prefix }p`)) {
-    playlist.parse(client, message, args)
-    return 0
-  }
-  if (!URL_PATTERN.test(message.content)) {
-    youtube.sr(client, message)
-    return 0
-  }
-  if (ytdl.validateURL(message.content)) {
-    youtube.queue(client, message)
-    return 0
-  }
-  if (message.content.includes('spotify')) {
-    spotify.play(client, message)
-    return 0
-  }
+  const [song] = await getSongs(servers[message.guild.id], `ytsearch: ${ args.join(' ') }`)
+  console.log(song)
+  await servers[message.guild.id].player.play(song.track)
 }

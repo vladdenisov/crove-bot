@@ -65,25 +65,25 @@ exports.sr = async (client, message, query, data = '') => {
     this.play(client, message)
   })
 }
+function getSongs (search) {
+  const node = client.player.nodes.first()
+
+  const params = new URLSearchParams()
+  params.append('identifier', search)
+
+  return fetch(`http://${ node.host }:${ node.port }/loadtracks?${ params }`, { headers: { Authorization: node.password } })
+    .then(res => res.json())
+    .then(data => data.tracks)
+    .catch(err => {
+      console.error(err)
+      return null
+    })
+}
 // Play first song in queue
-exports.play = async (client, message) => {
+exports.play = async (client, message, seek = 0) => {
+  console.log(seek)
   const server = servers[message.guild.id]
   try {
-    server.dispatcher = server.connection.play(ytdl(server.queue[0].url, {
-      filter: 'audioonly',
-      // eslint-disable-next-line no-bitwise
-      highWaterMark: 1 << 25 // To prevent unexpected end of video
-    }))
-    server.dispatcher.on('finish', async () => {
-      server.queue.shift()
-      if (!server.queue[0]) { await voice.leave(client, message); return }
-      this.play(client, message)
-    })
-    server.dispatcher.on('error', error => {
-      console.log(error)
-      server.queue.shift()
-      this.play(client, message)
-    })
     // Edit main message and queue message
     message.channel.messages.fetch().then(messages => {
       const ARR_MESSAGES = Array.from(messages)

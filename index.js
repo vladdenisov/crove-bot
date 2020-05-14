@@ -5,6 +5,7 @@
 const Discord = require('discord.js')
 const fs = require('fs')
 const Enmap = require('enmap')
+const { Manager } = require('@lavacord/discord.js')
 
 // Include config file
 const config = require('./config.json')
@@ -20,9 +21,17 @@ client.commands = new Enmap()
 // Create global object with servers
 global.servers = {}
 // Console.log that bot is ready and set bot activity
-client.on('ready', () => {
+client.on('ready', async () => {
   console.log(`Logged in as ${ client.user.tag }!`)
   client.user.setActivity(config.activity)
+  const nodes = [
+    { id: 'default', host: 'localhost', port: 2333, password: 'youshallnotpass' }
+  ]
+  client.manager = new Manager(client, nodes, {
+    user: client.user.id, // Client id
+    shards: (client.shard && client.shard.count) || 1
+  })
+  client.manager.connect()
 })
 // Load all files with commands
 fs.readdir('./commands/', (err, files) => {

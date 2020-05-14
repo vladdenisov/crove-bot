@@ -4,21 +4,20 @@ const reactions = require('./reactions.js')
 
 exports.join = async (client, message) => {
   if (message.member.voice.channel) {
-    await message.member.voice.channel.join()
-      .then(connection => {
-        if (!servers[message.guild.id]) {
-          servers[message.guild.id] = {
-            connection,
-            dispatcher: null,
-            queue: [],
-            channel: message.channel.id
-          }
-          reactions.hook(client, message)
-        }
-        if (servers[message.guild.id].connection === connection) return
-        servers[message.guild.id].connection = connection
-        servers[message.guild.id].queue = []
-      }).catch(e => { throw (e) })
+    if (!servers[message.guild.id]) {
+      servers[message.guild.id] = {
+        player: await client.manager.join({
+          guild: message.guild.id, // Guild id
+          channel: message.member.voice.channel.id, // Channel id
+          node: 'default'
+        }),
+        queue: [],
+        channel: message.channel.id
+      }
+      reactions.hook(client, message)
+    }
+    if (servers[message.guild.id].player) return
+    servers[message.guild.id].queue = []
   } else {
     throw new Error('NO_CHANNEL')
   }
