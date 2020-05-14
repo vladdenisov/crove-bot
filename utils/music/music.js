@@ -31,17 +31,26 @@ exports.run = async (client, message) => {
     else console.error(e)
     return e
   }
-  let song = ''
+  let songs = []
   const server = servers[message.guild.id]
-  if (!URL_PATTERN.test(message.content)) [song] = await this.songs(servers[message.guild.id], `ytsearch:${ args.join(' ') }`)
-  else [song] = await this.songs(servers[message.guild.id], `${ args.join(' ') }`)
-  if (!song) return 0
-  if (song.info.uri.includes('youtube')) {
-    const info = await ytdl.getBasicInfo(song.info.uri)
-    song.info.image = info.player_response.videoDetails.thumbnail.thumbnails[info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
+  if (!URL_PATTERN.test(args[0])) songs = await this.songs(servers[message.guild.id], `ytsearch:${ args.join(' ') }`)
+  else songs = await this.songs(servers[message.guild.id], `${ args[0] }`)
+  if (!songs) return 0
+  if (!args.includes('+p')) {
+    songs.splice(0, songs.length - 2)
   }
-  song.info.length = timeConverter(Math.round(song.info.length / 1000))
-  server.queue.push(song)
+  for (let song of songs) {
+    try {
+      if (song.info.uri.includes('youtube')) {
+        const info = await ytdl.getBasicInfo(song.info.uri)
+        song.info.image = info.player_response.videoDetails.thumbnail.thumbnails[info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
+      }
+    } catch (e) {
+      console.log(e.message)
+    }
+    song.info.length = timeConverter(Math.round(song.info.length / 1000))
+    server.queue.push(song)
+  }
   if (!server.player.playing) await play(server, client, message)
   else {
     message.channel.messages.fetch().then(resp => {
@@ -57,7 +66,10 @@ exports.run = async (client, message) => {
 
 const play = async (server, client, message) => {
   await server.player.play(server.queue[0].track)
-  server.player.once('error', console.error)
+  server.player.once('error', data => {
+    console.error(data)
+    server.player.stop()
+  })
   server.player.once('end', data => {
     if (data.reason === 'REPLACED') return
     const shiffed = server.queue.shift()
