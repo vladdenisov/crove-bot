@@ -16,8 +16,14 @@ exports.join = async (client, message) => {
       }
       reactions.hook(client, message)
     }
-    if (servers[message.guild.id].player) return
-    servers[message.guild.id].queue = []
+    if (!servers[message.guild.id].player) {
+      servers[message.guild.id].queue = []
+      servers[message.guild.id].player = await client.manager.join({
+        guild: message.guild.id, // Guild id
+        channel: message.member.voice.channel.id, // Channel id
+        node: 'default'
+      })
+    }
   } else {
     throw new Error('NO_CHANNEL')
   }
@@ -25,6 +31,8 @@ exports.join = async (client, message) => {
 exports.leave = async (client, message) => {
   if (!message.member.voice.channel) return
   servers[message.guild.id].player.destroy()
+  servers[message.guild.id].queue = []
+  servers[message.guild.id].player = null
   client.manager.leave(message.guild.id)
   message.channel.messages.fetch().then(messages => {
     const ARR_MESSAGES = Array.from(messages)
