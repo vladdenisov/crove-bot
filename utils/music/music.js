@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const ytdl = require('ytdl-core')
+const { MessageEmbed } = require('discord.js')
 
 const voice = require('../api/voice')
 exports.songs = async (server, search) => {
@@ -17,6 +18,7 @@ exports.songs = async (server, search) => {
       return null
     })
 }
+const timeConverter = s => (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s
 exports.run = async (client, message) => {
   // eslint-disable-next-line security/detect-unsafe-regex
   const URL_PATTERN = /^(?:\w+:)?\/\/(\S+)$/
@@ -38,13 +40,14 @@ exports.run = async (client, message) => {
     const info = await ytdl.getBasicInfo(song.info.uri)
     song.info.image = info.player_response.videoDetails.thumbnail.thumbnails[info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
   }
+  song.info.length = timeConverter(song.info.length/1000)
   server.queue.push(song)
-  if (!server.player.playing) await play(server)
+  if (!server.player.playing) await play(server, client, message)
   console.log(server.queue)
   return 0
 }
 
-const play = async server => {
+const play = async (server, client, message) => {
   await server.player.play(server.queue[0].track)
   server.player.once('error', console.error)
   server.player.once('end', data => {
@@ -53,6 +56,33 @@ const play = async server => {
     if (server.loop === true) {
       server.queue.push(shiffed)
     }
-    play(server)
+    play(server, client, message)
   })
+  message.channel.messages.fetch().then(resp => {
+    const messages = Array.from(resp)
+    let t = 0
+    const m = []
+    const eEmbed = new MessageEmbed()
+      .setColor(`#${((1 << 24) * Math.random() | 0).toString(16)}`)
+      .setTitle('Music Bot')
+      .setAuthor('Music')
+      .setDescription(server.queue[0].info.image.indexOf('scdn') > 1 ? "You've added song from spotify! It can sound not as you expect :)" : 'Playing Music')
+      .setImage(server.queue[0].info.image || client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
+      .addField('Now Playing', `[${server.queue[0].info.title}](${server.queue[0].info.image.indexOf('scdn') > 1 ? server.queue[0].spotifyURL : server.queue[0].info.uri})`)
+      .addField('Length: ', server.queue[0].info.length)
+    console.log(messages)
+    messages[messages.length - 1][1].edit(eEmbed)
+    server.queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${t - 1}. **${song.info.title}** __Length: ${song.info.length}__\n`) } return 0 })
+    messages[messages.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`)
+  })
+
+  try {
+    // Edit main message and queue message
+    
+  } catch (error) {
+    // Handle errors
+    console.error([error.message, error.name])
+    client.channels.fetch(server.channel).send(error.message).then(e => setTimeout(() => e.delete(), 2000))
+    server.queue.shift()
+  }
 }
