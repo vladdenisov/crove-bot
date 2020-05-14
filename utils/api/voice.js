@@ -24,6 +24,7 @@ exports.join = async (client, message) => {
   }
 }
 exports.leave = async (client, message) => {
+  if (!message.member.voice.channel) return
   await message.member.voice.channel.leave()
   servers[message.guild.id].connection = {}
   servers[message.guild.id].dispatcher.destroy()
