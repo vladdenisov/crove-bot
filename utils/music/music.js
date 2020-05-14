@@ -37,7 +37,7 @@ exports.run = async (client, message) => {
   else songs = await this.songs(servers[message.guild.id], `${ args[0] }`)
   if (!songs) return 0
   if (!args.includes('+p')) {
-    songs.splice(0, songs.length - 1)
+    songs = songs.slice(0, 1)
   }
   for (let song of songs) {
     try {
