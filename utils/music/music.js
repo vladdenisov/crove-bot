@@ -40,7 +40,7 @@ exports.run = async (client, message) => {
     const info = await ytdl.getBasicInfo(song.info.uri)
     song.info.image = info.player_response.videoDetails.thumbnail.thumbnails[info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
   }
-  song.info.length = timeConverter(song.info.length/1000)
+  song.info.length = timeConverter(song.info.length / 1000)
   server.queue.push(song)
   if (!server.player.playing) await play(server, client, message)
   else {
@@ -48,8 +48,8 @@ exports.run = async (client, message) => {
       const messages = Array.from(resp)
       let t = 0
       const m = []
-      server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${t - 1}. **${el.info.title}** __Length: ${el.info.length}__\n`) } return 0 })
-      messages[messages.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`)
+      server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.info.title }** __Length: ${ el.info.length }__\n`) } return 0 })
+      messages[messages.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
     })
   }
   return 0
@@ -64,6 +64,9 @@ const play = async (server, client, message) => {
     if (server.loop === true) {
       server.queue.push(shiffed)
     }
+    if (!server.queue[0]) {
+      voice.leave(client, message)
+    }
     play(server, client, message)
   })
   try {
@@ -73,16 +76,16 @@ const play = async (server, client, message) => {
       let t = 0
       const m = []
       const eEmbed = new MessageEmbed()
-        .setColor(`#${((1 << 24) * Math.random() | 0).toString(16)}`)
+        .setColor(`#${ ((1 << 24) * Math.random() | 0).toString(16) }`)
         .setTitle('Music Bot')
         .setAuthor('Music')
         .setDescription(server.queue[0].info.image.indexOf('scdn') > 1 ? "You've added song from spotify! It can sound not as you expect :)" : 'Playing Music')
         .setImage(server.queue[0].info.image || client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
-        .addField('Now Playing', `[${server.queue[0].info.title}](${server.queue[0].info.image.indexOf('scdn') > 1 ? server.queue[0].spotifyURL : server.queue[0].info.uri})`)
+        .addField('Now Playing', `[${ server.queue[0].info.title }](${ server.queue[0].info.image.indexOf('scdn') > 1 ? server.queue[0].spotifyURL : server.queue[0].info.uri })`)
         .addField('Length: ', server.queue[0].info.length)
       messages[messages.length - 1][1].edit(eEmbed)
-      server.queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${t - 1}. **${song.info.title}** __Length: ${song.info.length}__\n`) } return 0 })
-      messages[messages.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`)
+      server.queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ song.info.title }** __Length: ${ song.info.length }__\n`) } return 0 })
+      messages[messages.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
     })
   } catch (error) {
     // Handle errors
