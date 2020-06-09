@@ -1,6 +1,6 @@
 # Crove Bot [![Build Status](https://travis-ci.com/vladdenisov/crove-bot.svg?branch=master)](https://travis-ci.com/vladdenisov/crove-bot) [![Known Vulnerabilities](https://snyk.io/test/github/vladdenisov/crove-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vladdenisov/crove-bot?targetFile=package.json) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/vladdenisov/crove-bot) ![GitHub repo size](https://img.shields.io/github/repo-size/vladdenisov/crove-bot) ![GitHub](https://img.shields.io/github/license/vladdenisov/crove-bot) 
 
-Crove can play music from __Youtube, Spotify__ and It has many other commands such as `purge, kick, 8ball`, etc.  
+Crove can play music from __Youtube, Spotify, Soundcloud, Bandcamp__ and It has many other commands such as `purge, kick, 8ball, sauce, gif`, etc.  
 
 ## Getting Started
 
@@ -10,6 +10,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 - __Node.js 12.0.0 or newer is required.__
+- __Java 13 is required.__
+- __Follow [instructions](https://github.com/Frederikam/Lavalink#server-configuration) and Install [Lavalink](https://github.com/Frederikam/Lavalink).__
 - Linux (change package manager if necessary)   
 	```sh 
 	$ sudo apt install autoconf libtool g++ make  
@@ -37,10 +39,23 @@ Install node modules
 $ npm install 
 ```
 
+Follow [instructions](https://github.com/Frederikam/Lavalink#server-configuration) and Install [Lavalink](https://github.com/Frederikam/Lavalink). __(If you haven't done this yet)__
+
+Edit application.yml and [index.js]() __(optional)__
+```sh
+$ nano application.yml
+```
+
 Edit config.json (use example config and replace values)
 ```sh
 $ nano config.json
 ```
+
+Start Lavalink 
+```sh 
+$ java -jar Lavalink.jar
+```
+
 Start bot
 ```sh
 $ npm run start

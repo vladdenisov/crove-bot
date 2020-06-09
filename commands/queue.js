@@ -35,14 +35,14 @@ exports.run = async (client, message, args) => {
       const rm = server.queue[parseInt(args[1], 10)]
       server.queue.splice(server.queue[parseInt(args[1], 10)])
       await client.channels.fetch(server.channel).then(channel => {
-        channel.messages.fetch().then(messages => {
-          const ARR_MESSAGES = Array.from(messages)
-          const m = []
+        channel.messages.fetch().then(resp => {
+          const messages = Array.from(resp)
           let t = 0
-          server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.title }** __Length: ${ el.length }__\n`) } return 0 })
-          ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
+          const m = []
+          server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${t - 1}. **${el.info.title}** __Length: ${el.info.length}__\n`) } return 0 })
+          messages[messages.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`)
         })
-        message.channel.send(`Successfully removed \`${ rm.title }\`.`).then(m => setTimeout(() => m.delete(), 2000))
+        channel.send(`Successfully removed \`${ rm.title }\`.`).then(m => setTimeout(() => m.delete(), 2000))
       })
       break
     }
