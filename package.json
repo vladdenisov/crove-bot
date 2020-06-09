@@ -51,7 +51,7 @@
     "ibm-watson": "^5.4.0",
     "lavacord": "github:lavacord/lavacord",
     "node-fetch": "^2.6.0",
-    "snyk": "^1.316.1",
+    "snyk": "^1.337.0",
     "spotify-web-api-node": "^4.0.0",
     "ytdl-core": "^2.1.2"
   },

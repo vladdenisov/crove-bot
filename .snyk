@@ -8,3 +8,5 @@ patch:
         patched: '2020-05-01T07:02:54.541Z'
     - ibm-watson > async > lodash:
         patched: '2020-05-01T07:02:54.541Z'
+    - concurrently > lodash:
+        patched: '2020-06-09T16:20:17.607Z'
