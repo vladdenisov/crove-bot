@@ -63,10 +63,17 @@ $ npm run start
 
 ## Deployment
 
-Install bot on your server and run: 
-```sh
-$ npm run server
-```
+1.  Install bot on your server.
+
+2.  Fistly start Lavalink:
+    ```sh 
+    $ java -jar Lavalink
+    ```
+
+3.  Then start the bot:
+    ```sh
+    $ npm run server
+    ```
 
 ## Built With
 
