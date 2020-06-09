@@ -72,8 +72,8 @@ $ npm run server
 
 * [DiscordJS](https://github.com/discordjs/discord.js) - The Discord API framework used
 * [ytdl-core](https://github.com/fent/node-ytdl-core) - YouTube API framework
-* [ytpl](https://github.com/TimeForANinja/node-ytpl) - Used to handle YouTube playlists
-* [ytsr](https://github.com/TimeForANinja/node-ytsr) - Used to handle YouTube search
+* [Lavalink](https://github.com/Frederikam/Lavalink) - Standalone audio sending node based on Lavaplayer
+* [Lavacord](https://github.com/lavacord/lavacord) - Lavalink wrapper for Discord.js
 
 ## Contributing
 

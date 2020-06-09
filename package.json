@@ -55,9 +55,7 @@
     "node-fetch": "^2.6.0",
     "snyk": "^1.316.1",
     "spotify-web-api-node": "^4.0.0",
-    "ytdl-core": "^2.1.2",
-    "ytpl": "^0.1.21",
-    "ytsr": "^0.1.13"
+    "ytdl-core": "^2.1.2"
   },
   "devDependencies": {
     "@logux/eslint-config": "^36.1.2",
