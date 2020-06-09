@@ -41,7 +41,7 @@ $ npm install
 
 Follow [instructions](https://github.com/Frederikam/Lavalink#server-configuration) and Install [Lavalink](https://github.com/Frederikam/Lavalink). __(If you haven't done this yet)__
 
-Edit application.yml and [index.js]() __(optional)__
+Edit application.yml and [index.js](https://github.com/vladdenisov/crove-bot/blob/master/index.js#L27) __(optional)__
 ```sh
 $ nano application.yml
 ```
