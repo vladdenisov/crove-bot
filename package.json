@@ -42,7 +42,7 @@
     }
   },
   "dependencies": {
-    "@lavacord/discord.js": "0.0.6",
+    "@lavacord/discord.js": "0.0.7",
     "color-thief-node": "^1.0.3",
     "concurrently": "^5.2.0",
     "discord.js": "github:discordjs/discord.js",
