@@ -23,6 +23,7 @@ exports.run = (client, message, args) => {
   }
   embed.addField('\u200b', `__**Current Prefix**__: \`${ prefix }\``)
   message.channel.send(embed)
+  return 0
 }
 exports.help = {
   name: '`help`',

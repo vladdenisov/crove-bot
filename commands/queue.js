@@ -39,8 +39,8 @@ exports.run = async (client, message, args) => {
           const messages = Array.from(resp)
           let t = 0
           const m = []
-          server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${t - 1}. **${el.info.title}** __Length: ${el.info.length}__\n`) } return 0 })
-          messages[messages.length - 2][1].edit(`***Queue List: \n*** ${m.join('')}`)
+          server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.info.title }** __Length: ${ el.info.length }__\n`) } return 0 })
+          messages[messages.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
         })
         channel.send(`Successfully removed \`${ rm.title }\`.`).then(m => setTimeout(() => m.delete(), 2000))
       })

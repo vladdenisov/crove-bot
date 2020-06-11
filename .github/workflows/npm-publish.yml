@@ -8,15 +8,6 @@ on:
     types: [created]
 
 jobs:
-  prebuild:
-    runs-on: ubuntu-latest
-    steps:
-       - run: apt install autoconf libtool g++ make 
-       - uses: actions/setup-java@v1.3.0
-         with:
-           java-version: '13'
-           java-package: jdk
-           architecture: x64
   build:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +15,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
       - run: npm test
 
   publish-npm:
@@ -36,7 +26,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -50,7 +39,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
