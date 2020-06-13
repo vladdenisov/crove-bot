@@ -65,7 +65,7 @@ $ npm run start
 
 1.  Install bot on your server.
 
-2.  Fistly start Lavalink:
+2.  Firstly start Lavalink:
     ```sh 
     $ java -jar Lavalink
     ```

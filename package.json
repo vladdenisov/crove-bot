@@ -4,7 +4,7 @@
   "description": "Simple Bot For Discord",
   "main": "index.js",
   "scripts": {
-    "test": "echo At this point, the build has succeded and the bot should've been tested, but I don't want to run the bot from the CI.",
+    "test": "echo At this point, the build has succeeded and the bot should've been tested, but I don't want to run the bot from the CI.",
     "lint": "eslint \"{,!(node_modules)/**/}*.{js,jsx}\" --fix",
     "start": "node .",
     "server": "forever start --id \"crove\" index.js",
