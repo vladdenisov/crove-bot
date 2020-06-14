@@ -65,7 +65,15 @@ exports.run = async (client, message) => {
 }
 
 const play = async (server, client, message) => {
+  if (!server.queue[0]) {
+    if (server.queue[1]) {
+      server.queue.shift()
+      play(server, client, message)
+    } else server.player.stop()
+    return
+  }
   await server.player.play(server.queue[0].track)
+
   server.player.once('error', data => {
     console.error(data)
     server.player.stop()
