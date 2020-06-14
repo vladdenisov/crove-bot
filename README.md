@@ -78,7 +78,6 @@ $ npm run start
 ## Built With
 
 * [DiscordJS](https://github.com/discordjs/discord.js) - The Discord API framework used
-* [ytdl-core](https://github.com/fent/node-ytdl-core) - YouTube API framework
 * [Lavalink](https://github.com/Frederikam/Lavalink) - Standalone audio sending node based on Lavaplayer
 * [Lavacord](https://github.com/lavacord/lavacord) - Lavalink wrapper for Discord.js
 

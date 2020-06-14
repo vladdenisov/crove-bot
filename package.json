@@ -52,8 +52,7 @@
     "lavacord": "github:lavacord/lavacord",
     "node-fetch": "^2.6.0",
     "snyk": "^1.337.0",
-    "spotify-web-api-node": "^4.0.0",
-    "ytdl-core": "^2.1.2"
+    "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
     "@logux/eslint-config": "^36.1.2",

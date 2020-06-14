@@ -1,8 +1,9 @@
 const fetch = require('node-fetch')
-const ytdl = require('ytdl-core')
 const { MessageEmbed } = require('discord.js')
 
 const voice = require('../api/voice')
+const youtube = require('../miscellaneous/youtube')
+
 exports.songs = async (server, search) => {
   const node = { host: 'localhost', port: 2333, password: 'youshallnotpass' }
 
@@ -42,8 +43,7 @@ exports.run = async (client, message) => {
   for (let song of songs) {
     try {
       if (song.info.uri.includes('youtube')) {
-        const info = await ytdl.getBasicInfo(song.info.uri)
-        song.info.image = info.player_response.videoDetails.thumbnail.thumbnails[info.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
+        song.info.image = youtube.getThumbnail(song.info.uri)
       }
     } catch (e) {
       console.log(e.message)
