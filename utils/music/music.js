@@ -66,6 +66,7 @@ exports.run = async (client, message) => {
 
 const play = async (server, client, message) => {
   if (!server.queue[0]) {
+    message.reply("Sorry, can't play this track. <3").then(e => setTimeout(() => e.delete(), 2000))
     if (server.queue[1]) {
       server.queue.shift()
       play(server, client, message)
