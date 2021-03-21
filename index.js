@@ -14,7 +14,7 @@ const music = require('./utils/music/music')
 // Initialize Discord client
 const client = new Discord.Client({
   partials: ['REACTION', 'MESSAGE', 'CHANNEL', 'USER', 'GUILD_MEMBER'],
-  ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES', 'GUILD_MESSAGE_REACTIONS'] }
+  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES', 'GUILD_MESSAGE_REACTIONS']
 })
 // Initialize commands enmap
 client.commands = new Enmap()
