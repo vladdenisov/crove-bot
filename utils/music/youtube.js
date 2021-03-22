@@ -9,11 +9,11 @@ const voice = require('../api/voice')
 // Add song to server queue
 exports.queue = async (client, message) => {
   const VIDEO_INFO = await ytdl.getBasicInfo(message.content).catch(err => { console.log(err) })
-  let s = VIDEO_INFO.length_seconds
+  let s = parseInt(VIDEO_INFO.player_response.videoDetails.lengthSeconds)
   servers[message.guild.id].queue.push({
     url: message.content,
     length: (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s, // This expression converts seconds to "h:m:s" format
-    title: VIDEO_INFO.title,
+    title: VIDEO_INFO.player_response.videoDetails.title,
     thumbnail: VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails[VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
   })
   // If added song is first: then start playing
@@ -30,40 +30,35 @@ exports.queue = async (client, message) => {
 // Search function for YouTube
 exports.sr = async (client, message, query, data = '') => {
   if (!query) query = message.content
-  await ytsr(query, { limit: 4 }, async (error, result) => {
-    if (error) {
-      console.log(error)
-      return
-    }
-    let el; let
-      i = 0
-    while (!el) {
-      if (result.items[i].type === 'video') el = result.items[i]
-      else i += 1
-    }
-    servers[message.guild.id].queue.push({
-      url: el.link,
-      title: data !== '' ? `${ data.artists.join(', ') } - ${ data.name }` : el.title,
-      length: el.duration,
-      thumbnail: data !== '' ? data.cover : el.thumbnail,
-      spotifyURL: data !== '' ? data.url : el.link
-    })
-    if (data === '') {
-      const VIDEO_INFO = await ytdl.getBasicInfo(el.link).catch(err => { console.log(err) })
-      servers[message.guild.id].queue[servers[message.guild.id].queue.length - 1].thumbnail = VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails[VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
-    }
-    if (servers[message.guild.id].queue[1]) {
-      await message.channel.messages.fetch().then(messages => {
-        const ARR_MESSAGES = Array.from(messages)
-        const m = []; let
-          t = 0
-        servers[message.guild.id].queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ song.title }** __Length: ${ song.length }__\n`) } return 0 })
-        ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
-      })
-      return
-    }
-    this.play(client, message)
+  const result = await ytsr(query, { limit: 4 })
+  let el
+  let i = 0
+  while (!el) {
+    if (result.items[i].type === 'video') el = result.items[i]
+    else i += 1
+  }
+  servers[message.guild.id].queue.push({
+    url: el.url,
+    title: data !== '' ? `${ data.artists.join(', ') } - ${ data.name }` : el.title,
+    length: el.duration,
+    thumbnail: data !== '' ? data.cover : el.bestThumbnail,
+    spotifyURL: data !== '' ? data.url : el.url
   })
+  if (data === '') {
+    const VIDEO_INFO = await ytdl.getBasicInfo(el.url).catch(err => { console.log(err) })
+    servers[message.guild.id].queue[servers[message.guild.id].queue.length - 1].thumbnail = VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails[VIDEO_INFO.player_response.videoDetails.thumbnail.thumbnails.length - 1].url
+  }
+  if (servers[message.guild.id].queue[1]) {
+    await message.channel.messages.fetch().then(messages => {
+      const ARR_MESSAGES = Array.from(messages)
+      const m = []; let
+        t = 0
+      servers[message.guild.id].queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ song.title }** __Length: ${ song.length }__\n`) } return 0 })
+      ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
+    })
+    return
+  }
+  this.play(client, message)
 }
 // Play first song in queue
 exports.play = async (client, message) => {
