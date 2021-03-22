@@ -1,0 +1,11 @@
+{
+    "token": "DISCORD TOKEN",
+    "prefix": "COMMAND PREFIX",
+    "activity": "BOT ACTIVITY", 
+    "sp_id": "SPOTIFY ID",
+    "sp_secret": "SPOTIFY SECRET",
+    "watson": {
+        "key": "IBM WATSON TTS API KEY",
+        "url": "IBM WATSON TTS SERVICE URL"
+    }
+}
