@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 - __Node.js 12.0.0 or newer is required.__
 - __Java 13 is required.__
-- __Follow [instructions](https://github.com/Frederikam/Lavalink#server-configuration) and Install [Lavalink](https://github.com/freyacodes/Lavalink).__
+- __Follow [instructions](https://github.com/freyacodes/Lavalink#server-configuration) and Install [Lavalink](https://github.com/freyacodes/Lavalink).__
 - Linux (change package manager if necessary)   
 	```sh 
 	$ sudo apt install autoconf libtool g++ make  
