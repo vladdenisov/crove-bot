@@ -78,7 +78,7 @@ $ npm run start
 ## Built With
 
 * [DiscordJS](https://github.com/discordjs/discord.js) - The Discord API framework used
-* [Lavalink](https://github.com/Frederikam/Lavalink) - Standalone audio sending node based on Lavaplayer
+* [Lavalink](https://github.com/freyacodes/Lavalink) - Standalone audio sending node based on Lavaplayer
 * [Lavacord](https://github.com/lavacord/lavacord) - Lavalink wrapper for Discord.js
 
 ## Contributing
