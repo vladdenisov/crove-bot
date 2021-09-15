@@ -44,7 +44,7 @@
   "dependencies": {
     "@lavacord/discord.js": "0.0.7",
     "color-thief-node": "^1.0.3",
-    "concurrently": "^5.2.0",
+    "concurrently": "^6.0.0",
     "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.2.4",
     "giphy-api": "^2.0.1",
