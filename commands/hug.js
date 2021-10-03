@@ -8,7 +8,7 @@ exports.run = async (client, message, _args) => {
     if (!res.data[0]) return
     const rand = Math.round(0 - 0.5 + Math.random() * (res.data.length - 1))
     const attachment = new MessageAttachment(`https://i.giphy.com/media/${ res.data[rand].id }/giphy.gif`)
-    message.channel.send(message.mentions.users.first() ? `<@${ message.mentions.users.first().id }>` : '', attachment)
+    message.channel.send({ content: message.mentions.users.first() ? `<@${ message.mentions.users.first().id }>` : '', files: [attachment] })
   })
 }
 exports.help = {

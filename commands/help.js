@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
   } else {
     const cmd = client.commands.get(args[0])
     if (!cmd) {
-      message.channel.send(`There is no such command! To list all commands, write: \`${ prefix }help\``)
+      message.channel.send({ content: `There is no such command! To list all commands, write: \`${ prefix }help\`` })
       return 0
     }
     embed
@@ -22,7 +22,7 @@ exports.run = (client, message, args) => {
       .addField('\u200b', `__**Name:**__ *${ cmd.help.name }*\n__**Description:**__  *${ cmd.help.description }*\n__**Usage:**__  *${ cmd.help.usage }*`)
   }
   embed.addField('\u200b', `__**Current Prefix**__: \`${ prefix }\``)
-  message.channel.send(embed)
+  message.channel.send({ embeds: [embed] })
   return 0
 }
 exports.help = {

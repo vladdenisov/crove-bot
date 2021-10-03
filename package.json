@@ -45,14 +45,14 @@
     "@lavacord/discord.js": "0.0.7",
     "color-thief-node": "^1.0.3",
     "concurrently": "^5.2.0",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "^13.1.0",
     "enmap": "^5.2.4",
     "giphy-api": "^2.0.1",
     "ibm-watson": "^5.4.0",
     "lavacord": "github:lavacord/lavacord",
     "node-fetch": "^2.6.0",
     "snyk": "^1.337.0",
-    "spotify-web-api-node": "^4.0.0"
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "@logux/eslint-config": "^36.1.2",

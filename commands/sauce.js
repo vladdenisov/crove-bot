@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const { MessageEmbed } = require('discord.js')
 
 const mal = require('../utils/api/mal')
-const colors = require('../utils/api/color')
+// const colors = require('../utils/api/color')
 
 exports.run = (client, message, args) => {
   let url = message.attachments.first()
@@ -32,7 +32,7 @@ exports.run = (client, message, args) => {
           .setTitle(`${ el.title_native } | ${ el.title_romaji }`)
           .setImage(MAL_RES.image_url)
           .setAuthor('trace.moe')
-          .setColor(await colors.getDominant(MAL_RES.image_url))
+          // .setColor(await colors.getDominant(MAL_RES.image_url))
           .setURL(MAL_RES.url)
           .setDescription(MAL_RES.synopsis)
           .addField('__**Rating:**__ ', `**${ MAL_RES.score }**`)

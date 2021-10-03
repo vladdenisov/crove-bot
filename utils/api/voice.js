@@ -47,7 +47,7 @@ exports.leave = async (client, message) => {
         { name: '\u200B', value: '\u200B' },
         { name: 'Send link here to play something.', value: 'Waiting...' }
       )
-    ARR_MESSAGES[ARR_MESSAGES.length - 1][1].edit(eEmbed)
+    ARR_MESSAGES[ARR_MESSAGES.length - 1][1].edit({ embeds: [eEmbed] })
     ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit('***Queue List:***')
   })
 }

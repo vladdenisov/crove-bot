@@ -66,7 +66,7 @@ exports.run = async (client, message) => {
 
 const play = async (server, client, message) => {
   if (!server.queue[0]) {
-    message.reply("Sorry, can't play this track. <3").then(e => setTimeout(() => e.delete(), 2000))
+    message.channel.send({ content: "Sorry, can't play this track. <3" }).then(e => setTimeout(() => e.delete(), 2000))
     if (server.queue[1]) {
       server.queue.shift()
       play(server, client, message)
@@ -105,7 +105,7 @@ const play = async (server, client, message) => {
         .setImage(server.queue[0].info.image || client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
         .addField('Now Playing', `[${ server.queue[0].info.title }](${ server.queue[0].info.uri })`)
         .addField('Length: ', server.queue[0].info.length)
-      messages[messages.length - 1][1].edit(eEmbed)
+      messages[messages.length - 1][1].edit({ embeds: [eEmbed] })
       server.queue.map(song => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ song.info.title }** __Length: ${ song.info.length }__\n`) } return 0 })
       messages[messages.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
     })

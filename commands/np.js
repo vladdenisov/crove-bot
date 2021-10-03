@@ -14,7 +14,7 @@ exports.run = async (client, message) => {
   embed.setTitle(`${ servers[message.guild.id].queue[0].info.title }`)
   embed.addField('Current play time: ', `${ '▬'.repeat(Math.floor(c)) }🔵${ '▬'.repeat(Math.floor(cr)) } ${ (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s }/${ servers[message.guild.id].queue[0].info.length }`)
   embed.setURL(`${ servers[message.guild.id].queue[0].info.uri }`)
-  message.channel.send(embed).then(e => setTimeout(() => e.delete(), 10000))
+  message.channel.send({ embeds: [embed] }).then(e => setTimeout(() => e.delete(), 10000))
 }
 exports.help = {
   name: '`np`',
