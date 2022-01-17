@@ -50,7 +50,7 @@
     "giphy-api": "^2.0.1",
     "ibm-watson": "^5.4.0",
     "lavacord": "github:lavacord/lavacord",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "snyk": "^1.337.0",
     "spotify-web-api-node": "^5.0.2"
   },
