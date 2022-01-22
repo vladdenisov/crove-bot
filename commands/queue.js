@@ -21,10 +21,10 @@ exports.run = async (client, message, args) => {
             const ARR_MESSAGES = Array.from(messages)
             const m = []
             t = 0
-            server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.title }** __Length: ${ el.length }__\n`) } return 0 })
+            server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.info.title }** __Length: ${ el.info.length }__\n`) } return 0 })
             ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
           })
-          message.channel.send(`Successfully changed \`${ t.title }\` to \`${ server.queue[parseInt(args[1], 10)].title }\` position`).then(m => setTimeout(() => m.delete(), 2000))
+          message.channel.send(`Successfully changed \`${  server.queue[parseInt(args[1], 10)].info.title }\` to \`${ server.queue[parseInt(args[2], 10)].info.title }\` position`).then(m => setTimeout(() => m.delete(), 2000))
         })
       }
       break
@@ -42,14 +42,14 @@ exports.run = async (client, message, args) => {
           server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.info.title }** __Length: ${ el.info.length }__\n`) } return 0 })
           messages[messages.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
         })
-        channel.send(`Successfully removed \`${ rm.title }\`.`).then(m => setTimeout(() => m.delete(), 2000))
+        channel.send(`Successfully removed \`${ rm.info.title }\`.`).then(m => setTimeout(() => m.delete(), 2000))
       })
       break
     }
     default: {
       const m = []
       let t = 0
-      server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.title }** __Length: ${ el.length }__\n`) } return 0 })
+      server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.info.title }** __Length: ${ el.info.length }__\n`) } return 0 })
       message.reply(`***Queue List: \n*** ${ m.join('') }`).then(e => setTimeout(() => e.delete(), 7000))
     }
   }
