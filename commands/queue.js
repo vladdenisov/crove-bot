@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
             server.queue.map(el => { if (t === 0) { t += 1 } else if (t > 20) { return 0 } else { t += 1; m.push(`${ t - 1 }. **${ el.info.title }** __Length: ${ el.info.length }__\n`) } return 0 })
             ARR_MESSAGES[ARR_MESSAGES.length - 2][1].edit(`***Queue List: \n*** ${ m.join('') }`)
           })
-          message.channel.send(`Successfully changed \`${  server.queue[parseInt(args[1], 10)].info.title }\` to \`${ server.queue[parseInt(args[2], 10)].info.title }\` position`).then(m => setTimeout(() => m.delete(), 2000))
+          message.channel.send(`Successfully changed \`${ server.queue[parseInt(args[1], 10)].info.title }\` to \`${ server.queue[parseInt(args[2], 10)].info.title }\` position`).then(m => setTimeout(() => m.delete(), 2000))
         })
       }
       break

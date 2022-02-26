@@ -3,13 +3,14 @@ const { MessageEmbed } = require('discord.js')
 
 const voice = require('../api/voice')
 const youtube = require('../miscellaneous/youtube')
+const { getSimilar, search } = require('./getSimilar')
 
-exports.songs = async (server, search) => {
+exports.songs = async (server, name) => {
   const node = { host: 'localhost', port: 2333, password: 'youshallnotpass' }
 
   // eslint-disable-next-line node/no-unsupported-features/node-builtins
   const params = new URLSearchParams()
-  params.append('identifier', search)
+  params.append('identifier', name)
 
   return fetch(`http://${ node.host }:${ node.port }/loadtracks?${ params }`, { headers: { Authorization: node.password } })
     .then(res => res.json())
@@ -19,11 +20,12 @@ exports.songs = async (server, search) => {
       return null
     })
 }
+
 const timeConverter = s => (s - (s %= 60)) / 60 + (s > 9 ? ':' : ':0') + s
 exports.run = async (client, message) => {
   // eslint-disable-next-line security/detect-unsafe-regex
   const URL_PATTERN = /^(?:\w+:)?\/\/(\S+)$/
-  const args = message.content.trim().split(/ +/g)
+  let args = message.content.trim().split(/ +/g)
   message.delete()
   try {
     await voice.join(client, message)
@@ -34,8 +36,42 @@ exports.run = async (client, message) => {
   }
   let songs = []
   const server = servers[message.guild.id]
-  if (!URL_PATTERN.test(args[0])) songs = await this.songs(servers[message.guild.id], `ytsearch:${ args.join(' ') }`)
+  let autoplay = false
+  let toPlay = []
+  if (args.includes('+a')) {
+    autoplay = true
+    args = args.filter(a => a !== '+a')
+    const generateSimilar = async (song, i) => {
+      if (i > 15) return 0
+      if (i === 0) song = await search(args.join(' '))
+      if (!song) return 0
+      const res = await getSimilar(song.name, song.artist).catch(e => console.log(e))
+      console.log(res)
+      toPlay.push(res)
+      return await generateSimilar(res, i + 1)
+    }
+    const handleArray = async () => {
+      for (let toSong of toPlay) {
+        let song = await this.songs(servers[message.guild.id], `ytsearch:${ toSong.name } - ${ toSong.artist }`)
+        song = song[0]
+        try {
+          if (song.info.uri.includes('youtube')) {
+            song.info.image = youtube.getThumbnail(song.info.uri)
+          }
+        } catch (e) {
+          console.log(e.message)
+        }
+        if (autoplay) { console.log(await getSimilar(song.info.title)) }
+        song.info.length = timeConverter(Math.round(song.info.length / 1000))
+        server.queue.push(song)
+      }
+    }
+    toPlay.push(await search(args.join(' ')))
+    await generateSimilar(await search(args.join(' ')), 0)
+    await handleArray()
+  } else if (!URL_PATTERN.test(args[0])) songs = await this.songs(servers[message.guild.id], `ytsearch:${ args.join(' ') }`)
   else songs = await this.songs(servers[message.guild.id], `${ args[0] }`)
+
   if (!songs) return 0
   if (!args.includes('+p')) {
     songs = songs.slice(0, 1)
@@ -48,6 +84,7 @@ exports.run = async (client, message) => {
     } catch (e) {
       console.log(e.message)
     }
+    if (autoplay) { console.log(await getSimilar(song.info.title)) }
     song.info.length = timeConverter(Math.round(song.info.length / 1000))
     server.queue.push(song)
   }
@@ -93,14 +130,14 @@ const play = async (server, client, message) => {
   })
   try {
     // Edit main message and queue message
-    message.channel.messages.fetch().then(resp => {
+    message.channel.messages.fetch(true).then(resp => {
       const messages = Array.from(resp)
       let t = 0
       const m = []
       const eEmbed = new MessageEmbed()
         .setColor(`#${ ((1 << 24) * Math.random() | 0).toString(16) }`)
         .setTitle('Music Bot')
-        .setAuthor('Music')
+        .setAuthor({ name: 'Music', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://github.com/vladdenisov/crove-bot' })
         .setDescription('Playing Music')
         .setImage(server.queue[0].info.image || client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
         .addField('Now Playing', `[${ server.queue[0].info.title }](${ server.queue[0].info.uri })`)

@@ -4,8 +4,10 @@
     "activity": "BOT ACTIVITY", 
     "sp_id": "SPOTIFY ID",
     "sp_secret": "SPOTIFY SECRET",
+    "giphy": "GIPHY API KEY",
     "watson": {
         "key": "IBM WATSON TTS API KEY",
         "url": "IBM WATSON TTS SERVICE URL"
-    }
+    },
+    "lastfm": "LASTFM API KEY"
 }

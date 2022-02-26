@@ -74,7 +74,7 @@ client.on('guildCreate', guild => {
   })
 })
 // Launch command by message
-client.on('message', message => {
+client.on('messageCreate', message => {
   // Ignore bot messages
   if (message.author.bot) return
   // Ignore PM

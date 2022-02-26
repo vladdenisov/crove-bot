@@ -7,6 +7,8 @@ const handleReaction = async (client, message, reaction) => {
   const server = servers[message.guild.id]
   if (reaction.message.channel.name !== 'music_req') return
   if (!reaction.message.author.bot) return
+  if (!message.member.voice.channel) return
+  if (message.guild.id !== message.member.voice.channel.guildId) return
   if (reaction.emoji.name === '⏭') {
     server.player.stop()
   }

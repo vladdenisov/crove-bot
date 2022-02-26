@@ -39,7 +39,7 @@ exports.leave = async (client, message) => {
     const eEmbed = new MessageEmbed()
       .setColor('#0652DD')
       .setTitle('Music Bot')
-      .setAuthor('Music')
+      .setAuthor({ name: 'Music', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://github.com/vladdenisov/crove-bot' })
       .setDescription('Playing Music')
       .setThumbnail(client.user.avatarURL({ format: 'png', dynamic: true, size: 1024 }))
       .addFields(

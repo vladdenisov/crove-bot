@@ -9,6 +9,7 @@
     "start": "node .",
     "server": "forever start --id \"crove\" index.js",
     "stop": "forever stop --id \"crove\" index.js",
+    "dev": "nodemon --exec node --trace-deprecation .",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "lavalink": "java -jar Lavalink.jar"
@@ -43,14 +44,14 @@
   },
   "dependencies": {
     "@lavacord/discord.js": "0.0.7",
-    "color-thief-node": "^1.0.3",
     "concurrently": "^5.2.0",
     "discord.js": "^13.1.0",
     "enmap": "^5.2.4",
     "giphy-api": "^2.0.1",
     "ibm-watson": "^5.4.0",
+    "last-fm": "^5.3.0",
     "lavacord": "github:lavacord/lavacord",
-    "node-fetch": "^3.2.0",
+    "node-fetch": "^2.6.1",
     "snyk": "^1.337.0",
     "spotify-web-api-node": "^5.0.2"
   },
@@ -66,7 +67,8 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-unicorn": "^18.0.1",
-    "forever": "^2.0.0"
+    "forever": "^2.0.0",
+    "nodemon": "^2.0.15"
   },
   "snyk": true
 }
