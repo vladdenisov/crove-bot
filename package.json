@@ -45,13 +45,13 @@
   "dependencies": {
     "@lavacord/discord.js": "0.0.7",
     "concurrently": "^5.2.0",
-    "discord.js": "^13.1.0",
+    "discord.js": "^14.0.0",
     "enmap": "^5.2.4",
     "giphy-api": "^2.0.1",
     "ibm-watson": "^5.4.0",
     "last-fm": "^5.3.0",
     "lavacord": "github:lavacord/lavacord",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.10",
     "snyk": "^1.337.0",
     "spotify-web-api-node": "^5.0.2"
   },
