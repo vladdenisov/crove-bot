@@ -48,7 +48,7 @@
     "discord.js": "^13.1.0",
     "enmap": "^5.2.4",
     "giphy-api": "^2.0.1",
-    "ibm-watson": "^5.4.0",
+    "ibm-watson": "^6.0.0",
     "last-fm": "^5.3.0",
     "lavacord": "github:lavacord/lavacord",
     "node-fetch": "^2.6.1",
